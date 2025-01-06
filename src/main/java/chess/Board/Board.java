@@ -118,8 +118,8 @@ public class Board{
             board.put(0, new OccupiedTile(0, new Rook(0, Alliance.Black)));
             board.put(1, new OccupiedTile(1, new Knight(1, Alliance.Black)));
             board.put(2, new OccupiedTile(2, new Bishop(2, Alliance.Black)));
-            board.put(3, new OccupiedTile(3, new Queen(3, Alliance.Black)));
-            board.put(4, new OccupiedTile(4, new King(4, Alliance.Black)));
+            board.put(3, new OccupiedTile(3, new King(3, Alliance.Black)));
+            board.put(4, new OccupiedTile(4, new Queen(4, Alliance.Black)));
             board.put(5, new OccupiedTile(5, new Bishop(5, Alliance.Black)));
             board.put(6, new OccupiedTile(6, new Knight(6, Alliance.Black)));
             board.put(7, new OccupiedTile(7, new Rook(7, Alliance.Black)));
@@ -145,8 +145,8 @@ public class Board{
             board.put(56, new OccupiedTile(56, new Rook(56, Alliance.White)));
             board.put(57, new OccupiedTile(57, new Knight(57, Alliance.White)));
             board.put(58, new OccupiedTile(58, new Bishop(58, Alliance.White)));
-            board.put(59,new OccupiedTile(59, new Queen(59, Alliance.White)));
-            board.put(60, new OccupiedTile(60, new King(60, Alliance.White)));
+            board.put(59,new OccupiedTile(59, new King(59, Alliance.White)));
+            board.put(60, new OccupiedTile(60, new Queen(60, Alliance.White)));
             board.put(61, new OccupiedTile(61, new Bishop(61, Alliance.White)));
             board.put(62, new OccupiedTile(62, new Knight(62, Alliance.White)));
             board.put(63, new OccupiedTile(63, new Rook(63, Alliance.White)));
