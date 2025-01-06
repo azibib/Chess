@@ -442,6 +442,9 @@ public class Table{
                             label.setIcon(new ImageIcon(image));
                             haspiece=false;
                             board.addUndo(board);//add it to the list of undoable moves
+                            King king = (King)board.isInCheck();
+                            HashMap<Integer,Tile> tiles = board.getBlockableSquares();
+                            
                             
                             
                             

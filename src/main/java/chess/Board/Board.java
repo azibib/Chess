@@ -350,20 +350,22 @@ public class Board{
 
 
         public boolean kingCantMove(){
-            King king = (King) this.isInCheck();
-            if(king==null){return false;}
-            HashMap<Integer,Tile> map = this.getBlockableSquares();
-            HashSet<Piece> pieces = this.getPieceCheckingKing();
+            King king = (King) this.isInCheck();//check if the king is in check
+            if(king==null){return false;}//if not return false 
+            HashMap<Integer,Tile> map = this.getBlockableSquares();//else get the blockable squares
+            HashSet<Piece> pieces = this.getPieceCheckingKing();//get the pieces checking the king
             int count = 0;
             ArrayList<Move> allmoves = new ArrayList<>(king.calculateMoves(this));
-            for(Move move : allmoves){
-                if(pieces.contains(board.get(move.newTile()).getPiece())){ return false;}//meaning can it attack the piece thats attacking it
+            for(Move move : allmoves){//for all the moves that the king can make outside of it being in check
+                if(pieces.contains(board.get(move.newTile()).getPiece())){//the current problem with this is that it doesnt check for double check
+                     return false;
+                }//meaning can it attack the piece thats attacking it
                 if(map.get(move.newTile())!=null){count++;}
                 
                 
                 
             }
-            if(count == allmoves.size()){
+            if(count >= allmoves.size()){
                 
                 return true;
             }
@@ -375,7 +377,7 @@ public class Board{
 
 
 
-        public List<Move> kingCanMoveToTheseTilesDuringCheck(){
+        public List<Move> kingCanMoveToTheseTilesDuringCheck(){//this is only for letting the king move into spaces which are not occuupied or occupied by a piece threatening the king
             HashSet<Integer> allTilesPiecesCantMoveTo = new HashSet<>();//to check if these are valid tiles later
             List<Move> moves = new ArrayList<>();//hold possible moves
             King king = (King) this.isInCheck();//returns the king that is in check
@@ -388,7 +390,7 @@ public class Board{
                     
                 }
             }
-            for(Move move : king.calculateMoves(this)){//for ech move th eking can make
+            for(Move move : king.calculateMoves(this)){//for each move the king can make
                 if(!allTilesPiecesCantMoveTo.contains(move.newTile())){//if the invalid tiles set doesnt contain the current tile im looking to move to 
                     moves.add(move);//add that as a possible position
                 }
