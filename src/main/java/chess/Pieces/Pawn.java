@@ -178,6 +178,16 @@ public class Pawn extends Piece{
         return totalTurns;
     }
 
+    @Override
+    public boolean attacksDiagonal() {
+       return false;
+    }
+
+    @Override
+    public boolean attacksStraight() {
+        return false;
+    }
+
 
 
     

@@ -212,5 +212,15 @@ public class Queen extends Piece{
     public String toString() {
         return "Q";
     }
+
+    @Override
+    public boolean attacksDiagonal() {
+        return true;
+    }
+
+    @Override
+    public boolean attacksStraight() {
+        return true;
+    }
     
 }

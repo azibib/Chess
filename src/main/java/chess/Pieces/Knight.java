@@ -115,6 +115,16 @@ public class Knight extends Piece {
         return "N";
     }
 
+    @Override
+    public boolean attacksDiagonal() {
+        return false;
+    }
+
+    @Override
+    public boolean attacksStraight() {
+        return false;
+    }
+
     
     
 }

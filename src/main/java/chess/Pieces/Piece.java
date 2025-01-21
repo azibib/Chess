@@ -1,5 +1,6 @@
 package chess.Pieces;
 
+import java.util.HashSet;
 import java.util.List;
 
 import chess.Board.Board;
@@ -9,7 +10,7 @@ public abstract class Piece{
     protected int piecePosition;
     protected final Alliance pieceAlliance;
     private final int innitPosition;
-    
+    private Board board;
 
     
 
@@ -43,7 +44,12 @@ public abstract class Piece{
         return false;
     }
 
-    
+    public abstract boolean attacksDiagonal();
 
+    public abstract boolean attacksStraight();
+
+
+    
+    
 
 }

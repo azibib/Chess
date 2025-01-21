@@ -118,6 +118,22 @@ public class Rook extends Piece{
     }
     public void setMoved(boolean tf){
         hasMoved = tf;
+    }
+
+
+
+
+    @Override
+    public boolean attacksDiagonal() {
+        return false;
+    }
+
+
+
+
+    @Override
+    public boolean attacksStraight() {
+        return true;
     }  
 
     

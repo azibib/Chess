@@ -153,5 +153,15 @@ public class Bishop extends Piece{
     public String toString() {
         return "B";
     }
+
+    @Override
+    public boolean attacksDiagonal() {
+        return true;
+    }
+
+    @Override
+    public boolean attacksStraight() {
+        return false;
+    }
     
 }

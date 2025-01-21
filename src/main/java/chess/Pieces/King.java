@@ -29,7 +29,7 @@ public class King extends Piece{
         HashSet<Integer> cantMove = new HashSet<>();
         for(Piece p : pieces){
             if(p.getAlliance()==this.pieceAlliance){continue;}
-            if(p instanceof King){continue;}//this causes a infinite loop
+            if(p instanceof King){continue;}//this caused a infinite loop when it wasnt in (think about it)
             for(Move move : p.calculateMoves(board)){
                 if(!(p instanceof Pawn)){
                     cantMove.add(move.newTile());
@@ -195,6 +195,20 @@ public class King extends Piece{
     public void sethasMoved(boolean tf){
         hasMoved = tf;
     }
+
+
+    @Override
+    public boolean attacksDiagonal() {
+        return false;
+    }
+
+
+    @Override
+    public boolean attacksStraight() {
+        return false;
+    }
+
+    
 
     
 }
