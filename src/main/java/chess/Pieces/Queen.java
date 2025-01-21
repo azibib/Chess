@@ -34,6 +34,7 @@ public class Queen extends Piece{
             Tile t = board.getTile(i+current);
             
             if(t==null){continue;}
+            
             HashSet<Integer> currentRow = utils.getRow(current);
             if(i==1){
                 
@@ -43,11 +44,13 @@ public class Queen extends Piece{
                         i+=8;//if it gets blocked off by one of its own pieces then we stop adding squares after 
                     }
                     else if(board.getTile(piecePosition+i).getPiece()!=null&&board.getTile(piecePosition+i).getPiece().getAlliance()!=this.pieceAlliance){
+                        
                         legalMoves.add(new Move(current,i+current,this,board));
                         i+=8;
                     }
                     else{
                         if(board.getTile(piecePosition+i).getPiece()!=null&&board.getTile(piecePosition+i).getPiece().getAlliance()!=this.pieceAlliance){//stop move projectiosn if it hits a piece of the other teams
+                        
                             legalMoves.add(new Move(current,i+current,this,board));
                             i+=1;
                         }else{
@@ -64,11 +67,13 @@ public class Queen extends Piece{
                         i-=8;//if it gets blocked off by one of its own pieces then we stop adding squares after 
                     }
                     else if(board.getTile(piecePosition+i).getPiece()!=null&&board.getTile(piecePosition+i).getPiece().getAlliance()!=this.pieceAlliance){
+                        
                         legalMoves.add(new Move(current,i+current,this,board));
                         i-=8;
                     }
                     else{
                         if(board.getTile(piecePosition+i).getPiece()!=null&&board.getTile(piecePosition+i).getPiece().getAlliance()!=this.pieceAlliance){//stop move projections if it hits a piece of the other teams
+                          
                             legalMoves.add(new Move(current,i+current,this,board));
                             i-=1;
                         }else{
@@ -81,6 +86,7 @@ public class Queen extends Piece{
             if(i==8){
                 while(i<64&&board.getTile(i+piecePosition)!=null&&(board.getTile(i+piecePosition).getPiece()==null||board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance)){
                     if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
+                      
                         legalMoves.add(new Move(current,i+current,this,board));
                         i=64;  
 
@@ -94,6 +100,7 @@ public class Queen extends Piece{
             if(i==-8){
                 while(i+piecePosition>0&&board.getTile(i+piecePosition)!=null&&(board.getTile(i+piecePosition).getPiece()==null||board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance)){
                     if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
+                        
                         legalMoves.add(new Move(current,i+current,this,board));
                         i=0;  
 
@@ -118,9 +125,9 @@ public class Queen extends Piece{
                         
                     }
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){//if the piece at the tile is not null and the piece is not this alliance 
-                       
                         
-                       
+                        
+                        
                         legalMoves.add(new Move(current, i+current, this, board));//make this the last possible piece to move to and add it to the list
                         i=64;
                     }else{
@@ -144,7 +151,7 @@ public class Queen extends Piece{
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
                         
                         
-                        
+                       
                         legalMoves.add(new Move(current, i+current, this, board));
                         i=0;
                     }else{
@@ -181,13 +188,14 @@ public class Queen extends Piece{
                         if(touchingColumn(current)){
                             i=-65;
                         }else{
+                            
                             legalMoves.add(new Move(current, i+current, this, board));
                             i=-65;
                         }
                         
                     }
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
-                       
+                        
                         legalMoves.add(new Move(current, i+current, this, board));
                         i=0;
                     }else{

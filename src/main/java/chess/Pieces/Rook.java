@@ -36,15 +36,9 @@ public class Rook extends Piece{
             Tile t = board.getTile(current+i);
             
             if(t==null){continue;}
-            if(this.getUnderAttckBy()!=null){
-                System.out.println(getUnderAttckBy());
-                if(utils.getRowLabel(current+i)==utils.getRowLabel(this.getUnderAttckBy().getPosition())&&utils.getRowLabel(board.getKing(this.pieceAlliance).getPosition())==utils.getRowLabel(current+i)){
-                    
-                    if(getUnderAttckBy().attacksStraight()&&getUnderAttckBy().getAlliance()!=board.getTurn()){
-                        if(i==-8||i==8){continue;}
-                    }
-                }
-            }
+            
+            
+            
             
             if(t.getPiece()==null||t.getPiece().getAlliance()!=this.pieceAlliance){
                 HashSet<Integer> row = utils.getRow(piecePosition);
@@ -54,7 +48,7 @@ public class Rook extends Piece{
                             i+=8;//if it gets blocked off by one of its own pieces then we stop adding squares after 
                         }else{
                             if(board.getTile(piecePosition+i).getPiece()!=null&&board.getTile(piecePosition+i).getPiece().getAlliance()!=this.pieceAlliance){//stop move projectiosn if it hits a piece of the other teams
-                               
+                                
                                 legalMoves.add(new Move(current,i+current,this,board));
                                 i+=8;
                             }else{
@@ -100,7 +94,7 @@ public class Rook extends Piece{
                     }
                 }
                 if(i==-8){
-                    while(i+piecePosition>0&&board.getTile(i+piecePosition)!=null&&(board.getTile(i+piecePosition).getPiece()==null||board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance)){
+                    while(i+piecePosition>-1&&board.getTile(i+piecePosition)!=null&&(board.getTile(i+piecePosition).getPiece()==null||board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance)){
                         if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
                             
                             legalMoves.add(new Move(current,i+current,this,board));
