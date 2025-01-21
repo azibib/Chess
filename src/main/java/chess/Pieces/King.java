@@ -24,6 +24,16 @@ public class King extends Piece{
 
     @Override
     public List<Move> calculateMoves(Board board) {
+        Alliance a = pieceAlliance==Alliance.White ? Alliance.Black : Alliance.White;
+        HashSet<Piece> pieces = board.getActivePieces(a);
+        HashSet<Integer> cantMove = new HashSet<>();
+        for(Piece p : pieces){
+            if(p.getAlliance()==this.pieceAlliance){continue;}
+            if(p instanceof King){continue;}//this causes a infinite loop
+            for(Move move : p.calculateMoves(board)){
+                cantMove.add(move.newTile());
+            }
+        }
         List<Move> legalMoves = new ArrayList<>();
         for(int i : move_Coordinants){
             int current = this.piecePosition;
@@ -32,6 +42,8 @@ public class King extends Piece{
             if(t==null){continue;}
             else if(getRight().contains(i)){continue;}
             else if(getLeft().contains(i)){continue;}
+            else if(cantMove.contains(current+i)){continue;}
+
 
             else if((i==7||i==-7)&&t.isOccupied()&&t.getPiece().getAlliance()!=this.pieceAlliance){
                 legalMoves.add(new Move(current,i+current,this,board));

@@ -7,23 +7,23 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
-import java.awt.LayoutManager;
+
 import java.util.List;
-import java.awt.Point;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.nio.Buffer;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 
-import javax.imageio.IIOImage;
+
+
 import javax.imageio.ImageIO;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -33,17 +33,14 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JViewport;
-import javax.swing.SwingUtilities;
-import javax.swing.border.Border;
+
 
 import chess.Board.Board;
 import chess.Board.BoardUtils;
 import chess.Board.Move;
 import chess.Board.SpecialMove;
 import chess.Board.Tile;
-import chess.Board.pastMoves;
+
 import chess.Pieces.Alliance;
 import chess.Pieces.King;
 import chess.Pieces.Pawn;
@@ -57,10 +54,7 @@ public class Table{
     private sidePanel sidePanel;
     private lostPiece lostPiecePanel;
     private BoardUtils utils;
-    private Thread whiteThread;
-    private Thread blackThread;
-    private Clock whiteClock;
-    private Clock blackClock;
+
     private HashMap<Integer,JTile> tileMap = new HashMap<>();
     
     private Piece piece;
@@ -185,7 +179,7 @@ public class Table{
     private class JTile extends JPanel{
         private final int ID;
         private Tile tile;
-        private ImageIcon image;
+        
         private String picPath;
         
 
@@ -285,8 +279,9 @@ public class Table{
                 public void mouseEntered(MouseEvent e){
                     if(haspiece){return;}
                     
-                    if(!panel.tile.isOccupied()){return;}//if theres no piece on the panel youre currently looking at
+                    else if(!panel.tile.isOccupied()){return;}//if theres no piece on the panel youre currently looking at
                     Piece tempPiece = board.getTile(ID).getPiece();
+                    
                     if(panel.tile.getPiece().getAlliance()!=board.getTurn()&&!haspiece){
                         panel.setBackground(new Color(170,69,0,179));
                         
@@ -308,8 +303,7 @@ public class Table{
                         if(tempPiece.calculateMoves(board)!=null||!tempPiece.calculateMoves(board).isEmpty()){
                             
                             HashMap<Integer,Tile> allTiles = board.getBlockableSquares();
-                            HashSet<Piece> piecesCheckingKing = board.getPieceCheckingKing();
-                            List<Move> moevsForKing = board.kingCanMoveToTheseTilesDuringCheck();
+                            
                             int count = 0;
                             if(board.kingCantMove()&&tempPiece instanceof King){
                                 panel.setBackground(new Color(170,69,0,179));
@@ -442,8 +436,7 @@ public class Table{
                             label.setIcon(new ImageIcon(image));
                             haspiece=false;
                             board.addUndo(board);//add it to the list of undoable moves
-                            King king = (King)board.isInCheck();
-                            HashMap<Integer,Tile> tiles = board.getBlockableSquares();
+                            
                             
                             
                             
@@ -772,7 +765,7 @@ public class Table{
                 panel.setBackground(new Color(191, 133, 90));
                 
 
-                JLabel label = new JLabel();
+                
                 File file = new File("src/main/resources/" + lostPieces.get(i).getAlliance().toString().substring(0,1)+lostPieces.get(i).toString()+".gif");
 
                 try {
