@@ -100,15 +100,7 @@ public class Knight extends Piece {
         return Collections.unmodifiableList(legalMoves);
     }
 
-    private boolean touchingLeftColumn(int position){
-        int[] left = {0,8,16,24,32,40,48,56,64};
-
-        for(int i : left){
-            if(i==position){return true;}
-        }
-        return false;
-
-    }
+    
 
     @Override
     public String toString() {

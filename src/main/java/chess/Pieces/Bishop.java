@@ -2,7 +2,7 @@ package chess.Pieces;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+
 import java.util.List;
 
 import chess.Board.Board;
@@ -33,12 +33,14 @@ public class Bishop extends Piece{
                         if(utils.getRow(piecePosition).contains(i+piecePosition)){//check if moving seven spaces would stil lhave it in the same row
                             i=64;
                         }else{//else add it to the moves set as the last possible psace to move to
+                            
                             legalMoves.add(new Move(current, i+current, this, board));
                             i=64;
                         }
                         
                     }
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){//if the piece at the tile is not null and the piece is not this alliance 
+                        
                         legalMoves.add(new Move(current, i+current, this, board));//make this the last possible piece to move to and add it to the list
                         i=64;
                     }else{
@@ -53,12 +55,16 @@ public class Bishop extends Piece{
                         if(utils.getRow(piecePosition).contains(i+piecePosition)){
                             i=0;
                         }else{
+                            
                             legalMoves.add(new Move(current, i+current, this, board));
                             i=0;
                         }
                         
                     }
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
+                        
+                        
+                        
                         legalMoves.add(new Move(current, i+current, this, board));
                         i=0;
                     }else{
@@ -72,12 +78,16 @@ public class Bishop extends Piece{
                     if(touchingColumn(i+piecePosition)){
                         if(touchingColumn(current)){i+=64;}
                         else{
+                            
                             legalMoves.add(new Move(current, i+current, this, board));
                             i=64;
                         }
                         
                     }
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
+                       
+                       
+                        
                         legalMoves.add(new Move(current, i+current, this, board));
                         i=64;
                     }else{
@@ -95,6 +105,7 @@ public class Bishop extends Piece{
                             i=-65;
                         }
                         else{
+                            
                             legalMoves.add(new Move(current, i+current, this, board));
                            
                             i-=65;
@@ -102,6 +113,7 @@ public class Bishop extends Piece{
                         
                     }
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
+                       
                         legalMoves.add(new Move(current, i+current, this, board));
                         i=0;
                     }else{
@@ -130,21 +142,7 @@ public class Bishop extends Piece{
         }
         return false;
     }
-    private boolean touchingLeft(int position){//to find out wether its touching the left edge 
-        int[] left = {0,8,16,24,32,40,48,56};
-        for(int i : left){
-            if(position==i){return true;}
-        }
-        return false;
-    }
-
-    private boolean touchingRight(int position){//to find out wether its touching the right edge 
-        int[] right = {7,15,23,31,39,47,55,63};
-        for(int i : right){
-            if(position==i){return true;}
-        }
-        return false;
-    }
+    
     
 
     

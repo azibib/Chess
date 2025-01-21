@@ -399,6 +399,32 @@ public class Board{
             return moves;
         }
 
+       
+
+        /*
+         * int this you put in the same allinace of the kign you want 
+         *
+         */
+        public King getKing(Alliance a){
+            for(Piece p : this.getActivePieces(a)){
+                if(p instanceof King){
+                    King king = (King) p;
+                    return king;
+                }
+            }
+            return null;
+        }
+
+
+        
+
+        /*i need to check wether or not a piece is blocking the king from being in check
+
+        get a set of all the pieces which are attacking other pieces on the board of the other alliance 
+
+        when ive got those pieces i need to check if the king is in the same row or column or diagonal from the piece being attacked
+
+        */
         
 
         

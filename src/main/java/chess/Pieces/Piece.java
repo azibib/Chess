@@ -11,6 +11,8 @@ public abstract class Piece{
     protected final Alliance pieceAlliance;
     private final int innitPosition;
     private Board board;
+    private boolean UnderAttack = false;
+    private Piece underAttackBy;
 
     
 
@@ -50,6 +52,17 @@ public abstract class Piece{
 
 
     
-    
+    public void setUnderAttack(boolean bool, Piece piece){
+        this.UnderAttack =bool;
+        this.underAttackBy = piece;
+    }
+
+    public boolean getUnderAttack(){
+        return UnderAttack;
+    }
+
+    public Piece getUnderAttckBy(){
+        return this.underAttackBy;
+    }
 
 }

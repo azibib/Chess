@@ -278,8 +278,9 @@ public class Table{
                 @Override
                 public void mouseEntered(MouseEvent e){
                     if(haspiece){return;}
+                    int i =0;
                     
-                    else if(!panel.tile.isOccupied()){return;}//if theres no piece on the panel youre currently looking at
+                    if(!panel.tile.isOccupied()){return;}//if theres no piece on the panel youre currently looking at
                     Piece tempPiece = board.getTile(ID).getPiece();
                     
                     if(panel.tile.getPiece().getAlliance()!=board.getTurn()&&!haspiece){
