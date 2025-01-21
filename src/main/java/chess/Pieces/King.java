@@ -32,7 +32,14 @@ public class King extends Piece{
             if(p instanceof King){continue;}//this causes a infinite loop
             for(Move move : p.calculateMoves(board)){
                 cantMove.add(move.newTile());
+                if(p instanceof Pawn&&(move.newTile()!=p.getPosition()+8||move.newTile()!=p.getPosition()-8)){
+                    
+                    cantMove.add(move.newTile()-1);
+                    cantMove.add(move.newTile()+1);
+                    
+                }
             }
+            
         }
         List<Move> legalMoves = new ArrayList<>();
         for(int i : move_Coordinants){
