@@ -62,6 +62,30 @@ public class Pawn extends Piece{
             Tile t = board.getTile(current+i);
             
             if(t==null){continue;}
+            if(this.getUnderAttack()){
+                int count=0;
+                for(Piece p : this.getUnderAttckBy()){
+
+                    
+                    if(p.attacksStraight()){
+                        if(utils.getRowLabel(i+current)==utils.getRowLabel(p.getPosition())||utils.getColumnLabel(current+i).equals(utils.getColumnLabel(p.getPosition()))){
+                            if(board.getTile(i+current).isOccupied()&&!board.getTile(i+current).getPiece().equals(p)){
+                                count++;
+                            }
+                            if(!board.getTile(i+current).isOccupied()){count++;}
+                        }
+                        if(utils.areOnSameDiagonal(p.getPosition(), this.piecePosition)&&utils.areOnSameDiagonal(i+current, this.piecePosition)&&utils.areOnSameDiagonal(p.getPosition(), i+current)){
+                            if(board.getTile(i+current).isOccupied()&&!board.getTile(i+current).getPiece().equals(p)){
+                                count++;
+                            }
+                            if(!board.getTile(i+current).isOccupied()){count++;}
+                        }
+                    }
+                }
+                if(count>0){continue;}
+                
+                
+            }
             else if((i==7||i==-7)&&!t.isOccupied()){continue;}
             else if((i==9||i==-9)&&!t.isOccupied()){continue;}
             else if((i==8||i==-8)&&t.isOccupied()){continue;}
