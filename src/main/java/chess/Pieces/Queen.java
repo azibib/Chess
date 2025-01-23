@@ -38,30 +38,7 @@ public class Queen extends Piece{
             if(t==null){continue;}
             
             if(this.getUnderAttack()){
-                int count=0;
-                for(Piece piece : this.getUnderAttckBy()){
-                    if(utils.getColumnLabel(this.piecePosition).equals(utils.getColumnLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getColumnLabel(current).equals(utils.getColumnLabel(piece.getPosition()))){
-                      
-                        if(i==1||i==-1){count++;}
-                        if(i==7||i==-7){count++;}
-                        if(i==9||i==-9){count++;}  
-                    }
-                    else if(utils.getRowLabel(this.piecePosition)==(utils.getRowLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getRowLabel(current)==(utils.getRowLabel(piece.getPosition()))){
-                        
-                        if(i==8||i==-8){count++;}
-                        if(i==7||i==-7){count++;}
-                        if(i==9||i==-9){count++;}
-                            
-                        
-                        
-                    }
-                    //still have to check to see if theres a diagonal attack by the piece
-                    else if(!utils.areOnSameDiagonal(i+current, piece.getPosition())&&utils.areOnSameDiagonal(i+current,k.getPosition())){
-                        count++;
-                        
-                    }
-                }
-                if(count>0){continue;}
+                
                 
             }
             HashSet<Integer> currentRow = utils.getRow(current);

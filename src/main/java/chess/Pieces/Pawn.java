@@ -60,37 +60,19 @@ public class Pawn extends Piece{
         for(int i : move_Coordinants){
             int current = this.piecePosition;
             Tile t = board.getTile(current+i);
-            
+            King k = board.getKing(pieceAlliance);
             if(t==null){continue;}
             if(this.getUnderAttack()){
-                int count=0;
-                for(Piece p : this.getUnderAttckBy()){
-
-                    
-                    if(p.attacksStraight()){
-                        if(utils.getRowLabel(i+current)==utils.getRowLabel(p.getPosition())||utils.getColumnLabel(current+i).equals(utils.getColumnLabel(p.getPosition()))){
-                            if(board.getTile(i+current).isOccupied()&&!board.getTile(i+current).getPiece().equals(p)){
-                                count++;
-                            }
-                            if(!board.getTile(i+current).isOccupied()){count++;}
-                        }
-                        if(utils.areOnSameDiagonal(p.getPosition(), this.piecePosition)&&utils.areOnSameDiagonal(i+current, this.piecePosition)&&utils.areOnSameDiagonal(p.getPosition(), i+current)){
-                            if(board.getTile(i+current).isOccupied()&&!board.getTile(i+current).getPiece().equals(p)){
-                                count++;
-                            }
-                            if(!board.getTile(i+current).isOccupied()){count++;}
-                        }
-                    }
-                }
-                if(count>0){continue;}
+                
+                
                 
                 
             }
-            else if((i==7||i==-7)&&!t.isOccupied()){continue;}
+            if((i==7||i==-7)&&!t.isOccupied()){continue;}
             else if((i==9||i==-9)&&!t.isOccupied()){continue;}
             else if((i==8||i==-8)&&t.isOccupied()){continue;}
-            else if((i==16)&&(t.isOccupied()||board.getTile(current+8).isOccupied())){continue;}
-            else if((i==-16)&&(t.isOccupied()||board.getTile(current-8).isOccupied())){continue;}
+            else if((i==16)&&(t.isOccupied()||t.isOccupied())){continue;}
+            else if((i==-16)&&(t.isOccupied()||t.isOccupied())){continue;}
             else if((i==-16||i==16)&&current!=innitPosition){continue;}
             else if(i==-7||i==7||i==9||i==-9){
                 HashSet<Integer> currCol = utils.getColomn(current);

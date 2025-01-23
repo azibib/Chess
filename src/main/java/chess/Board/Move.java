@@ -80,12 +80,7 @@ public class Move {
             }else{
                 
                 lostPiece = board.Occupy(this.newPosition, this.piece);//if this entire time the piece i was trying to move wasnt a pawn then just make it occupy the new spot
-                for(int i =0;i<64;i++){
-                    if(board.getTile(i).isOccupied()){
-                        board.getTile(i).getPiece().setUnderAttack(false);
-
-                    }
-                }
+                
                 
             }
             if(lostPiece!=null){
@@ -96,7 +91,12 @@ public class Move {
 
             
             
-            
+            for(int i =0;i<64;i++){
+                if(board.getTile(i).isOccupied()){
+                    board.getTile(i).getPiece().setUnderAttack(false);
+
+                }
+            }
             
             return piece;//returns the piece that just made the move
         }

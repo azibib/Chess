@@ -29,6 +29,7 @@ public class Main{
         King king = new King(12, Alliance.White);
         Rook r1 = new Rook(13, Alliance.White);
         Queen r2 = new Queen(14, Alliance.White);
+        Queen r5 = new Queen(15, Alliance.Black);
         King kig = new King(36, Alliance.Black);
         Bishop b = new Bishop(0, Alliance.Black);
         Rook r3 = new Rook(39, Alliance.Black);
@@ -42,6 +43,7 @@ public class Main{
 
 
         board.setPiece((Piece)king,12);
+        board.setPiece((Piece)r5,15);
         board.setPiece((Piece)k,2);
         board.setPiece((Piece)r1,13);
         board.setPiece((Piece)r2,14);

@@ -38,31 +38,6 @@ public class Rook extends Piece{
             int difference = k.getPosition()-this.piecePosition;
             if(t==null){continue;}
             if(this.getUnderAttack()){
-                int count =0;
-                
-                for(Piece piece : this.getUnderAttckBy()){
-                    //this first one is if theyre in the same column as the king
-                    if(utils.getColumnLabel(this.piecePosition).equals(utils.getColumnLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getColumnLabel(current).equals(utils.getColumnLabel(piece.getPosition()))){
-                    
-                        
-                        if(i==1||i==-1){count++;}
-                        
-                    
-                    }
-                    //this is if theyre in the same row as the king 
-                    else if(utils.getRowLabel(this.piecePosition)==(utils.getRowLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getRowLabel(current)==(utils.getRowLabel(piece.getPosition()))){
-                    
-                        if(i==8||i==-8){count++;}
-                        
-                    
-                        //this one is just if theyre in the same diagonal 
-                    }else if(utils.areOnSameDiagonal(this.piecePosition, k.getPosition())&&utils.areOnSameDiagonal(this.piecePosition, piece.piecePosition)&&utils.areOnSameDiagonal(k.getPosition(), piece.piecePosition)){
-                        count++;
-                    }
-                }
-                if(count>0){continue;}
-                
-                
                 
             }
             
