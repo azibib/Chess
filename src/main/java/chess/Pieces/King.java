@@ -62,18 +62,26 @@ public class King extends Piece{
             HashSet<Integer> column = utils.getColomn(i+current);//make sure there sint a piece that can attack straight that can hurt me
             HashSet<Integer> contains = new HashSet<>();//ad those values to be checked here so i know where to skip over them or not
             if(this.getUnderAttack()){
+                int count=0;
                 for(Piece p : this.getUnderAttckBy()){
 
-                    int difference = this.piecePosition-p.getPosition();
+                    
                     if(p.attacksStraight()){
                         if(utils.getRowLabel(i+current)==utils.getRowLabel(p.getPosition())||utils.getColumnLabel(current+i).equals(utils.getColumnLabel(p.getPosition()))){
                             if(board.getTile(i+current).isOccupied()&&!board.getTile(i+current).getPiece().equals(p)){
-                                continue;
+                                count++;
                             }
-                        if(!board.getTile(i+current).isOccupied()){continue;}
+                            if(!board.getTile(i+current).isOccupied()){count++;}
+                        }
+                        if(utils.areOnSameDiagonal(p.getPosition(), this.piecePosition)&&utils.areOnSameDiagonal(i+current, this.piecePosition)&&utils.areOnSameDiagonal(p.getPosition(), i+current)){
+                            if(board.getTile(i+current).isOccupied()&&!board.getTile(i+current).getPiece().equals(p)){
+                                count++;
+                            }
+                            if(!board.getTile(i+current).isOccupied()){count++;}
+                        }
                     }
                 }
-                }
+                if(count>0){continue;}
                 
                 
             }
