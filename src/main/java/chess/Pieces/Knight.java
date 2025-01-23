@@ -37,12 +37,7 @@ public class Knight extends Piece {
             Tile t = board.getTile(current+i);
             
             if(t==null){continue;}
-            King k = board.getKing(pieceAlliance);
-            if(this.getUnderAttack()){
-                continue;
-                
-
-            }
+            
             
 
             

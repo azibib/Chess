@@ -31,38 +31,7 @@ public class Bishop extends Piece{
             int current = this.piecePosition;
             Tile t = board.getTile(i+current);
             if(t==null){continue;}
-            King k = board.getKing(this.pieceAlliance);
-            int difference = k.getPosition()-this.piecePosition;
             
-            if(this.getUnderAttack()){
-                int count=0;
-                for(Piece piece : this.getUnderAttckBy()){
-                    if(utils.getColumnLabel(this.piecePosition).equals(utils.getColumnLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getColumnLabel(current).equals(utils.getColumnLabel(piece.getPosition()))){
-                            
-                        if(i==7||i==-7){count++;}
-                        if(i==9||i==-9){count++;}
-                            
-                        
-                        
-                    }
-                    else if(utils.getRowLabel(this.piecePosition)==(utils.getRowLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getRowLabel(current)==(utils.getRowLabel(piece.getPosition()))){
-                          
-                            if(i==7||i==-7){count++;}
-                            if(i==9||i==-9){count++;}
-                            
-    
-                        
-                    }
-                    //still have to check to see if theres a diagonal attack by the piece
-                    else if(!utils.areOnSameDiagonal(i+current, piece.getPosition())){
-                        count++;
-                        
-                    }
-                }
-                if(count>0){continue;}
-                
-                
-            }
             if(i==7){
                 while (i+piecePosition<64&&board.getTile(i+piecePosition)!=null&&(board.getTile(i+piecePosition).getPiece()==null||board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance)) {
                     if(touchingColumn(i+piecePosition)){//if its touching a column on the edge of the board 
