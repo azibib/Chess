@@ -28,13 +28,93 @@ public class Queen extends Piece{
     public List<Move> calculateMoves(Board board) {
         List<Move> legalMoves = new ArrayList<>();
         
-
+        
         for(int i : move_Coordinants){
             int current = this.piecePosition;
             Tile t = board.getTile(i+current);
-            
+            King k = board.getKing(this.pieceAlliance);
+            int difference = k.getPosition()-this.piecePosition;
+
             if(t==null){continue;}
-            
+            if(this.getUnderAttack()){
+                if(utils.getColumnLabel(this.piecePosition).equals(utils.getColumnLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getColumnLabel(current).equals(utils.getColumnLabel(getUnderAttckBy().getPosition()))){
+                    if(difference<0){
+                        int c = piecePosition-8;
+                        
+                        while(c>k.getPosition()){
+                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
+                                c = 10000;
+                            }else{
+                               c-=8;
+                            }
+                        }
+                        
+                        if(c==k.getPosition()){
+                            
+                            if(i==1||i==-1){continue;}
+                            if(i==7||i==-7){continue;}
+                            if(i==9||i==-9){continue;}
+                        }
+                    }else{
+                        int c = piecePosition+8;
+                        
+                        while(c<k.getPosition()){
+                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
+                                c = 10000;
+                            }else{
+                               c+=8;
+                            }
+                        }
+                        
+                        if(c==k.getPosition()){
+                            
+                            if(i==1||i==-1){continue;}
+                            if(i==7||i==-7){continue;}
+                            if(i==9||i==-9){continue;}
+                        }
+                    }
+                    
+                }
+                else if(utils.getRowLabel(this.piecePosition)==(utils.getRowLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getRowLabel(current)==(utils.getRowLabel(getUnderAttckBy().getPosition()))){
+                    if(difference<0){
+                        int c = piecePosition-1;
+                        
+                        while(c>k.getPosition()){
+                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
+                                c = 10000;
+                            }else{
+                               c--;
+                            }
+                        }
+                        
+                        if(c==k.getPosition()){
+                            
+                            if(i==8||i==-8){continue;}
+                            if(i==7||i==-7){continue;}
+                            if(i==9||i==-9){continue;}
+                        }
+                    }else{
+                        int c = piecePosition+1;
+                        
+                        while(c<k.getPosition()){
+                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
+                                c = 10000;
+                            }else{
+                               c++;
+                            }
+                        }
+                        
+                        if(c==k.getPosition()){
+                            
+                            if(i==8||i==-8){continue;}
+                            if(i==9||i==-9){continue;}
+                            if(i==7||i==-7){continue;}
+                        }
+                    }
+                    
+                }
+                //still have to check to see if theres a diagonal attack by the piece
+            }
             HashSet<Integer> currentRow = utils.getRow(current);
             if(i==1){
                 
@@ -44,13 +124,17 @@ public class Queen extends Piece{
                         i+=8;//if it gets blocked off by one of its own pieces then we stop adding squares after 
                     }
                     else if(board.getTile(piecePosition+i).getPiece()!=null&&board.getTile(piecePosition+i).getPiece().getAlliance()!=this.pieceAlliance){
-                        
+                        if(board.getTile(i+current).isOccupied()){
+                            board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                        }
                         legalMoves.add(new Move(current,i+current,this,board));
                         i+=8;
                     }
                     else{
                         if(board.getTile(piecePosition+i).getPiece()!=null&&board.getTile(piecePosition+i).getPiece().getAlliance()!=this.pieceAlliance){//stop move projectiosn if it hits a piece of the other teams
-                        
+                            if(board.getTile(i+current).isOccupied()){
+                                board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                            }
                             legalMoves.add(new Move(current,i+current,this,board));
                             i+=1;
                         }else{
@@ -67,13 +151,17 @@ public class Queen extends Piece{
                         i-=8;//if it gets blocked off by one of its own pieces then we stop adding squares after 
                     }
                     else if(board.getTile(piecePosition+i).getPiece()!=null&&board.getTile(piecePosition+i).getPiece().getAlliance()!=this.pieceAlliance){
-                        
+                        if(board.getTile(i+current).isOccupied()){
+                            board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                        }
                         legalMoves.add(new Move(current,i+current,this,board));
                         i-=8;
                     }
                     else{
                         if(board.getTile(piecePosition+i).getPiece()!=null&&board.getTile(piecePosition+i).getPiece().getAlliance()!=this.pieceAlliance){//stop move projections if it hits a piece of the other teams
-                          
+                            if(board.getTile(i+current).isOccupied()){
+                                board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                            }
                             legalMoves.add(new Move(current,i+current,this,board));
                             i-=1;
                         }else{
@@ -86,7 +174,9 @@ public class Queen extends Piece{
             if(i==8){
                 while(i<64&&board.getTile(i+piecePosition)!=null&&(board.getTile(i+piecePosition).getPiece()==null||board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance)){
                     if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
-                      
+                        if(board.getTile(i+current).isOccupied()){
+                            board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                        }
                         legalMoves.add(new Move(current,i+current,this,board));
                         i=64;  
 
@@ -100,7 +190,9 @@ public class Queen extends Piece{
             if(i==-8){
                 while(i+piecePosition>0&&board.getTile(i+piecePosition)!=null&&(board.getTile(i+piecePosition).getPiece()==null||board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance)){
                     if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
-                        
+                        if(board.getTile(i+current).isOccupied()){
+                            board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                        }
                         legalMoves.add(new Move(current,i+current,this,board));
                         i=0;  
 
@@ -118,7 +210,9 @@ public class Queen extends Piece{
                         if(utils.getRow(piecePosition).contains(i+piecePosition)){//check if moving seven spaces would stil lhave it in the same row
                             i=64;
                         }else{//else add it to the moves set as the last possible psace to move to
-                            
+                            if(board.getTile(i+current).isOccupied()){
+                                board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                            }
                             legalMoves.add(new Move(current, i+current, this, board));
                             i=64;
                         }
@@ -126,7 +220,9 @@ public class Queen extends Piece{
                     }
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){//if the piece at the tile is not null and the piece is not this alliance 
                         
-                        
+                        if(board.getTile(i+current).isOccupied()){
+                            board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                        }
                         
                         legalMoves.add(new Move(current, i+current, this, board));//make this the last possible piece to move to and add it to the list
                         i=64;
@@ -142,7 +238,9 @@ public class Queen extends Piece{
                         if(utils.getRow(piecePosition).contains(i+piecePosition)){
                             i=0;
                         }else{
-                            
+                            if(board.getTile(i+current).isOccupied()){
+                                board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                            }
                             legalMoves.add(new Move(current, i+current, this, board));
                             i=0;
                         }
@@ -150,7 +248,9 @@ public class Queen extends Piece{
                     }
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
                         
-                        
+                        if(board.getTile(i+current).isOccupied()){
+                            board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                        }
                        
                         legalMoves.add(new Move(current, i+current, this, board));
                         i=0;
@@ -166,14 +266,18 @@ public class Queen extends Piece{
                         if(touchingColumn(current)){
                             i=64;
                         }else{
-                            
+                            if(board.getTile(i+current).isOccupied()){
+                                board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                            }
                             legalMoves.add(new Move(current, i+current, this, board));
                             i=64;
                         }
                         
                     }
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
-                        
+                        if(board.getTile(i+current).isOccupied()){
+                            board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                        }
                         legalMoves.add(new Move(current, i+current, this, board));
                         i=64;
                     }else{
@@ -188,14 +292,18 @@ public class Queen extends Piece{
                         if(touchingColumn(current)){
                             i=-65;
                         }else{
-                            
+                            if(board.getTile(i+current).isOccupied()){
+                                board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                            }
                             legalMoves.add(new Move(current, i+current, this, board));
                             i=-65;
                         }
                         
                     }
                     else if(board.getTile(i+piecePosition).getPiece()!=null&&board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance){
-                        
+                        if(board.getTile(i+current).isOccupied()){
+                            board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                        }
                         legalMoves.add(new Move(current, i+current, this, board));
                         i=0;
                     }else{

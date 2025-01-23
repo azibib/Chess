@@ -226,6 +226,14 @@ public class Board{
         public int returnTotlaMoves(){
             return TotalMoves;
         }
+
+        public void setPiece(Piece piece , int pos){
+            if(piece == null){
+                throw new IllegalArgumentException("Piece must not be null");
+            }
+            if(pos<0||pos>63){throw new IllegalArgumentException("Position must be higher than -1 and lower than 64");}
+            board.put(pos, new OccupiedTile(pos, piece));
+        }
     
     
         public Piece isInCheck(){

@@ -26,7 +26,99 @@ public class Bishop extends Piece{
             int current = this.piecePosition;
             Tile t = board.getTile(i+current);
             if(t==null){continue;}
+            King k = board.getKing(this.pieceAlliance);
+            int difference = k.getPosition()-this.piecePosition;
             
+            if(this.getUnderAttack()){
+                if(utils.getColumnLabel(this.piecePosition).equals(utils.getColumnLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getColumnLabel(current).equals(utils.getColumnLabel(getUnderAttckBy().getPosition()))){
+                    if(difference<0){
+                        int c = piecePosition-8;
+                        int d = piecePosition+8;//checking if there anything in between the piece and the other piece not the piece and the king
+                        while(c>k.getPosition()){
+                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
+                                c = 10000;
+                            }else{
+                               c-=8;
+                            }
+                        }
+                        while(d<this.getUnderAttckBy().getPosition()){
+                            if(board.getTile(d)!=null&&board.getTile(d).isOccupied()&&!board.getTile(d).getPiece().equals(this.getUnderAttckBy())){
+                                this.setUnderAttack(false, null);
+
+                            }
+                            d+=8;
+                        }
+                        
+                        if(c==k.getPosition()&&this.getUnderAttack()){
+                            
+                            if(i==7||i==-7){continue;}
+                            if(i==9||i==-9){continue;}
+                        }
+                    }else{
+                        int c = piecePosition+8;
+                        int d = this.piecePosition-8;
+                        
+                        while(c<k.getPosition()){
+                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
+                                c = 10000;
+                            }else{
+                               c+=8;
+                            }
+                        }
+                        while(d>this.getUnderAttckBy().getPosition()){
+                            if(board.getTile(d)!=null&&board.getTile(d).isOccupied()&&!board.getTile(d).getPiece().equals(this.getUnderAttckBy())){
+                                this.setUnderAttack(false, null);
+
+                            }
+                            d-=8;
+                        }
+                        
+                        if(c==k.getPosition()&&this.getUnderAttack()){
+                            
+                            if(i==7||i==-7){continue;}
+                            if(i==9||i==-9){continue;}
+                        }
+                    }
+                    
+                }
+                else if(utils.getRowLabel(this.piecePosition)==(utils.getRowLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getRowLabel(current)==(utils.getRowLabel(getUnderAttckBy().getPosition()))){
+                    if(difference<0){
+                        int c = piecePosition-1;
+                        
+                        while(c>k.getPosition()){
+                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
+                                c = 10000;
+                            }else{
+                               c--;
+                            }
+                        }
+                        
+                        if(c==k.getPosition()){
+                            
+                            if(i==7||i==-7){continue;}
+                            if(i==9||i==-9){continue;}
+                        }
+                    }else{
+                        int c = piecePosition+1;
+                        
+                        while(c<k.getPosition()){
+                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
+                                c = 10000;
+                            }else{
+                               c++;
+                            }
+                        }
+                        
+                        if(c==k.getPosition()){
+                            
+                            if(i==7||i==-7){continue;}
+                            if(i==9||i==-9){continue;}
+                        }
+                    }
+                    
+                }
+                //still have to check to see if theres a diagonal attack by the piece
+            }
             if(i==7){
                 while (i+piecePosition<64&&board.getTile(i+piecePosition)!=null&&(board.getTile(i+piecePosition).getPiece()==null||board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance)) {
                     if(touchingColumn(i+piecePosition)){//if its touching a column on the edge of the board 

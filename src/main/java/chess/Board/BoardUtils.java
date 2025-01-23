@@ -214,4 +214,15 @@ public class BoardUtils {
         }
         
     }
+    public boolean areOnSameDiagonal(int index1, int index2) {
+        
+        int row1 = index1 / 8;
+        int col1 = index1 % 8;
+
+        int row2 = index2 / 8;
+        int col2 = index2 % 8;
+
+        
+        return Math.abs(row1 - row2) == Math.abs(col1 - col2);
+    }
 }

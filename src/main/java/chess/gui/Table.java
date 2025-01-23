@@ -54,7 +54,7 @@ public class Table{
     private sidePanel sidePanel;
     private lostPiece lostPiecePanel;
     private BoardUtils utils;
-
+    private boolean ispractice = false;
     private HashMap<Integer,JTile> tileMap = new HashMap<>();
     
     private Piece piece;
@@ -62,6 +62,65 @@ public class Table{
     private ArrayList<Piece> lostPieces = new ArrayList<>();
     private JPanel main = new JPanel();
     
+
+    public Table(Board board){
+
+        if(board==null){throw new IllegalArgumentException("Board Cannot be null");}
+        ispractice =true;
+        this.board = board;
+        ArrayList<Piece> allLostPieces = lostPieces;
+        ArrayList<String> allMoves = moves;
+        
+        
+        
+
+        this.frame = new JFrame();
+        frame.setLayout(new BorderLayout());
+        JButton P1button = new JButton("Undo");
+        JButton P2button = new JButton("Undo");
+        P1button.setPreferredSize(new Dimension(80,25));
+        P2button.setPreferredSize(new Dimension(80,25));
+
+       
+        
+        
+
+        // Wrap the button in a panel with FlowLayout
+        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        
+        buttonPanel.setBackground(new Color(191, 133, 90));
+        
+        
+        
+        
+       
+        
+        
+        
+        buttonPanel.add(P1button, BorderLayout.WEST);
+        
+        
+        
+        
+        
+        main.setLayout(new GridLayout(8,8));
+        mainPanelSetUP();
+        
+        
+        
+        frame.add(main,BorderLayout.CENTER);
+        frame.add(buttonPanel, BorderLayout.SOUTH);
+        sidePanel = new sidePanel();
+        lostPiecePanel = new lostPiece();
+        frame.add(sidePanel, BorderLayout.EAST);
+        frame.add(lostPiecePanel, BorderLayout.WEST);
+        
+        this.frame.setSize(new Dimension(600,600));
+        this.frame.setResizable(false);
+        this.frame.setVisible(true);
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+    }
 
     public Table() throws InterruptedException{
         utils = new BoardUtils();
@@ -310,6 +369,9 @@ public class Table{
                                 panel.setBackground(new Color(170,69,0,179));
                                 return;
                             }
+                            Alliance a = tempPiece.getAlliance()==Alliance.White ?Alliance.Black:Alliance.White;
+                            King k = board.getKing(a);
+                            
                             if(allTiles!=null){
                                 
                                 for(Move move : tempPiece.calculateMoves(board)){
@@ -337,6 +399,7 @@ public class Table{
                                 al = board.kingCanMoveToTheseTilesDuringCheck();
                                 count = 0;
                             }
+                            
                             
                             for(Move move : al){
                                 JTile t = tileMap.get(move.newTile());
@@ -500,7 +563,9 @@ public class Table{
                                 
                                 
                             }else{
-                                moves.add(p.toString()+utils.getColumnLabel(p.getPosition())+utils.getRowLabel(p.getPosition()));
+                                if(!ispractice){
+                                    moves.add(p.toString()+utils.getColumnLabel(p.getPosition())+utils.getRowLabel(p.getPosition()));//this add teh move to the side panel which is the history of all the past moves
+                                }
                                 mainPanelSetUP();
                                 sidePanel.sidePanelSetUP();
                                 

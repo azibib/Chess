@@ -6,14 +6,16 @@ import java.util.HashSet;
 import java.util.List;
 
 import chess.Board.Board;
+import chess.Board.BoardUtils;
 import chess.Board.Move;
 import chess.Board.SpecialMove;
 import chess.Board.Tile;
 import chess.Board.Castling;
+
 public class King extends Piece{
     private int[] move_Coordinants = {-9,-8,-7,-1,1,7,8,9};
     private boolean hasMoved;
-    
+    private BoardUtils utils = new BoardUtils();
     public King(int position, Alliance alliance){
         super(position, alliance);
         this.hasMoved = false;
@@ -48,7 +50,19 @@ public class King extends Piece{
         for(int i : move_Coordinants){
             int current = this.piecePosition;
             Tile t = board.getTile(current+i);
-            
+            HashSet<Integer> row = utils.getRow(current+i);//make sure ot check that there is no piece that attacks staright in the row that could hurt me
+            HashSet<Integer> column = utils.getColomn(i+current);//make sure there sint a piece that can attack straight that can hurt me
+            HashSet<Integer> contains = new HashSet<>();//ad those values to be checked here so i know where to skip over them or not
+            if(this.getUnderAttack()){
+                Piece p = this.getUnderAttckBy();
+                int difference = this.piecePosition-p.getPosition();
+                if(p.attacksStraight()){
+                    if(utils.getRowLabel(i+current)==utils.getRowLabel(p.getPosition())||utils.getColumnLabel(current+i).equals(utils.getColumnLabel(p.getPosition()))){
+                        continue;
+                    }
+                }
+            }
+            if(contains.contains(i+current)){continue;}
             if(t==null){continue;}
             else if(getRight().contains(i)){continue;}
             else if(getLeft().contains(i)){continue;}
