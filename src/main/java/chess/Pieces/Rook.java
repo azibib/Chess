@@ -39,7 +39,7 @@ public class Rook extends Piece{
             if(t==null){continue;}
             if(this.getUnderAttack()){
                 int count =0;
-                System.out.println(true + ":" + this.piecePosition);
+                
                 for(Piece piece : this.getUnderAttckBy()){
                     //this first one is if theyre in the same column as the king
                     if(utils.getColumnLabel(this.piecePosition).equals(utils.getColumnLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getColumnLabel(current).equals(utils.getColumnLabel(piece.getPosition()))){
