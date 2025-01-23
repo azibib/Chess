@@ -12,7 +12,7 @@ public abstract class Piece{
     private final int innitPosition;
     private Board board;
     private boolean UnderAttack = false;
-    private Piece underAttackBy;
+    private HashSet<Piece> underAttackBy = new HashSet<>();
 
     
 
@@ -54,14 +54,19 @@ public abstract class Piece{
     
     public void setUnderAttack(boolean bool, Piece piece){
         this.UnderAttack =bool;
-        this.underAttackBy = piece;
+
+        this.underAttackBy.add(piece);
+    }
+    public void setUnderAttack(boolean bool){
+        this.UnderAttack =bool;
+        this.underAttackBy = new HashSet<>();
     }
 
     public boolean getUnderAttack(){
         return UnderAttack;
     }
 
-    public Piece getUnderAttckBy(){
+    public HashSet<Piece> getUnderAttckBy(){
         return this.underAttackBy;
     }
 

@@ -36,88 +36,33 @@ public class Queen extends Piece{
             int difference = k.getPosition()-this.piecePosition;
 
             if(t==null){continue;}
+            
             if(this.getUnderAttack()){
-                if(utils.getColumnLabel(this.piecePosition).equals(utils.getColumnLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getColumnLabel(current).equals(utils.getColumnLabel(getUnderAttckBy().getPosition()))){
-                    if(difference<0){
-                        int c = piecePosition-8;
-                        
-                        while(c>k.getPosition()){
-                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
-                                c = 10000;
-                            }else{
-                               c-=8;
-                            }
-                        }
-                        
-                        if(c==k.getPosition()){
-                            
-                            if(i==1||i==-1){continue;}
-                            if(i==7||i==-7){continue;}
-                            if(i==9||i==-9){continue;}
-                        }
-                    }else{
-                        int c = piecePosition+8;
-                        
-                        while(c<k.getPosition()){
-                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
-                                c = 10000;
-                            }else{
-                               c+=8;
-                            }
-                        }
-                        
-                        if(c==k.getPosition()){
-                            
-                            if(i==1||i==-1){continue;}
-                            if(i==7||i==-7){continue;}
-                            if(i==9||i==-9){continue;}
-                        }
+                int count=0;
+                for(Piece piece : this.getUnderAttckBy()){
+                    if(utils.getColumnLabel(this.piecePosition).equals(utils.getColumnLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getColumnLabel(current).equals(utils.getColumnLabel(piece.getPosition()))){
+                      
+                        if(i==1||i==-1){count++;}
+                        if(i==7||i==-7){count++;}
+                        if(i==9||i==-9){count++;}  
                     }
-                    
-                }
-                else if(utils.getRowLabel(this.piecePosition)==(utils.getRowLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getRowLabel(current)==(utils.getRowLabel(getUnderAttckBy().getPosition()))){
-                    if(difference<0){
-                        int c = piecePosition-1;
+                    else if(utils.getRowLabel(this.piecePosition)==(utils.getRowLabel(board.getKing(pieceAlliance).getPosition()))&&utils.getRowLabel(current)==(utils.getRowLabel(piece.getPosition()))){
                         
-                        while(c>k.getPosition()){
-                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
-                                c = 10000;
-                            }else{
-                               c--;
-                            }
-                        }
-                        
-                        if(c==k.getPosition()){
+                        if(i==8||i==-8){count++;}
+                        if(i==7||i==-7){count++;}
+                        if(i==9||i==-9){count++;}
                             
-                            if(i==8||i==-8){continue;}
-                            if(i==7||i==-7){continue;}
-                            if(i==9||i==-9){continue;}
-                        }
-                    }else{
-                        int c = piecePosition+1;
                         
-                        while(c<k.getPosition()){
-                            if(board.getTile(c)!=null&&board.getTile(c).isOccupied()&&!board.getTile(c).getPiece().equals(k)){
-                                c = 10000;
-                            }else{
-                               c++;
-                            }
-                        }
                         
-                        if(c==k.getPosition()){
-                            
-                            if(i==8||i==-8){continue;}
-                            if(i==9||i==-9){continue;}
-                            if(i==7||i==-7){continue;}
-                        }
                     }
-                    
+                    //still have to check to see if theres a diagonal attack by the piece
+                    else if(!utils.areOnSameDiagonal(i+current, piece.getPosition())&&utils.areOnSameDiagonal(i+current,k.getPosition())){
+                        count++;
+                        
+                    }
                 }
-                //still have to check to see if theres a diagonal attack by the piece
-                else if(!utils.areOnSameDiagonal(i+current, this.getUnderAttckBy().getPosition())&&utils.areOnSameDiagonal(i+current,k.getPosition())){
-                    continue;
-                    
-                }
+                if(count>0){continue;}
+                
             }
             HashSet<Integer> currentRow = utils.getRow(current);
             if(i==1){

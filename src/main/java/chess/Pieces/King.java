@@ -62,16 +62,20 @@ public class King extends Piece{
             HashSet<Integer> column = utils.getColomn(i+current);//make sure there sint a piece that can attack straight that can hurt me
             HashSet<Integer> contains = new HashSet<>();//ad those values to be checked here so i know where to skip over them or not
             if(this.getUnderAttack()){
-                Piece p = this.getUnderAttckBy();
-                int difference = this.piecePosition-p.getPosition();
-                if(p.attacksStraight()){
-                    if(utils.getRowLabel(i+current)==utils.getRowLabel(p.getPosition())||utils.getColumnLabel(current+i).equals(utils.getColumnLabel(p.getPosition()))){
-                        if(board.getTile(i+current).isOccupied()&&!board.getTile(i+current).getPiece().equals(this.getUnderAttckBy())){
-                            continue;
-                        }
+                for(Piece p : this.getUnderAttckBy()){
+
+                    int difference = this.piecePosition-p.getPosition();
+                    if(p.attacksStraight()){
+                        if(utils.getRowLabel(i+current)==utils.getRowLabel(p.getPosition())||utils.getColumnLabel(current+i).equals(utils.getColumnLabel(p.getPosition()))){
+                            if(board.getTile(i+current).isOccupied()&&!board.getTile(i+current).getPiece().equals(p)){
+                                continue;
+                            }
                         if(!board.getTile(i+current).isOccupied()){continue;}
                     }
                 }
+                }
+                
+                
             }
             if(contains.contains(i+current)){continue;}
             
