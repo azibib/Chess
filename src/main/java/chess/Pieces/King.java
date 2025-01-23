@@ -1,5 +1,12 @@
 package chess.Pieces;
-
+/*
+ * everything about this class is pretty much done besides for check mates which will be decided in the table class
+ * other than that the king cant move when there isnt a place to move
+ * the king cant move into a spot that another piece from the other team could just move into and win from right after
+ * 
+ * 
+ * 
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
