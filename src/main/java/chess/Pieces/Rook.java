@@ -141,7 +141,7 @@ public class Rook extends Piece{
                 else{
                     this.setUnderAttack(false, null);
                 }
-                //still have to check to see if theres a diagonal attack by the piece
+                
             }
             
             

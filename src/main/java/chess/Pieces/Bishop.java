@@ -127,6 +127,9 @@ public class Bishop extends Piece{
                     continue;
                     
                 }
+                else{
+                    this.setUnderAttack(false, null);
+                }
             }
             if(i==7){
                 while (i+piecePosition<64&&board.getTile(i+piecePosition)!=null&&(board.getTile(i+piecePosition).getPiece()==null||board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance)) {

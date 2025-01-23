@@ -1,5 +1,8 @@
 package chess.Pieces;
-
+/*
+ * 
+ * this class is also finsihed from what i understand
+ */
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -34,6 +37,13 @@ public class Knight extends Piece {
             Tile t = board.getTile(current+i);
             
             if(t==null){continue;}
+            King k = board.getKing(pieceAlliance);
+            if(this.getUnderAttack()){
+                continue;
+                
+
+            }
+            
 
             
 

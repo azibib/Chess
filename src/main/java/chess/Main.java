@@ -9,6 +9,7 @@ import chess.Board.Board;
 import chess.Pieces.Alliance;
 import chess.Pieces.Bishop;
 import chess.Pieces.King;
+import chess.Pieces.Knight;
 import chess.Pieces.Piece;
 import chess.Pieces.Queen;
 import chess.Pieces.Rook;
@@ -31,6 +32,7 @@ public class Main{
         King kig = new King(36, Alliance.Black);
         Bishop b = new Bishop(0, Alliance.Black);
         Rook r3 = new Rook(39, Alliance.Black);
+        Knight k = new Knight(2, Alliance.White);
 
 
         
@@ -40,6 +42,7 @@ public class Main{
 
 
         board.setPiece((Piece)king,12);
+        board.setPiece((Piece)k,2);
         board.setPiece((Piece)r1,13);
         board.setPiece((Piece)r2,14);
         board.setPiece((Piece)r3,39);

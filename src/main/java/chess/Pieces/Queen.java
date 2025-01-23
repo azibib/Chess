@@ -114,6 +114,10 @@ public class Queen extends Piece{
                     
                 }
                 //still have to check to see if theres a diagonal attack by the piece
+                else if(!utils.areOnSameDiagonal(i+current, this.getUnderAttckBy().getPosition())&&utils.areOnSameDiagonal(i+current,k.getPosition())){
+                    continue;
+                    
+                }
             }
             HashSet<Integer> currentRow = utils.getRow(current);
             if(i==1){
