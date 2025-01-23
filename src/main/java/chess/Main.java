@@ -27,7 +27,7 @@ public class Main{
         for(int i =0;i<64;i++){board.unOccupy(i);}
         King king = new King(12, Alliance.White);
         Rook r1 = new Rook(13, Alliance.White);
-        Queen r2 = new Queen(14, Alliance.Black);
+        Queen r2 = new Queen(14, Alliance.White);
         King kig = new King(36, Alliance.Black);
         Bishop b = new Bishop(0, Alliance.Black);
         Rook r3 = new Rook(39, Alliance.Black);

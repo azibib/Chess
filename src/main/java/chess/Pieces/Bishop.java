@@ -1,5 +1,10 @@
 package chess.Pieces;
-
+/*
+ * 
+ * 
+ * im also pretty sure this class is finished too 
+ * 
+ */
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -118,6 +123,10 @@ public class Bishop extends Piece{
                     
                 }
                 //still have to check to see if theres a diagonal attack by the piece
+                else if(!utils.areOnSameDiagonal(i+current, this.getUnderAttckBy().getPosition())){
+                    continue;
+                    
+                }
             }
             if(i==7){
                 while (i+piecePosition<64&&board.getTile(i+piecePosition)!=null&&(board.getTile(i+piecePosition).getPiece()==null||board.getTile(i+piecePosition).getPiece().getAlliance()!=this.pieceAlliance)) {
