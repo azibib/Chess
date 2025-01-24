@@ -34,10 +34,11 @@ public class Rook extends Piece{
             
             int current = this.piecePosition;
             Tile t = board.getTile(current+i);
-            King k = board.getKing(this.pieceAlliance);
+            
             
             if(t==null){continue;}
             if(this.getUnderAttack()){
+                King k = board.getKing(this.pieceAlliance);
                 boolean otherPiecebetween = false;
                 boolean isColumn = false;
                 boolean isRow = false;

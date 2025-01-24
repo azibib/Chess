@@ -6,6 +6,7 @@ package chess.Pieces;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 import chess.Board.Board;
@@ -38,6 +39,51 @@ public class Knight extends Piece {
             
             if(t==null){continue;}
             
+            if(this.getUnderAttack()){
+                King k = board.getKing(pieceAlliance);
+                boolean otherPiecebetween = false;
+                boolean isColumn = false;
+                boolean isRow = false;
+                boolean isDiagonal = false;
+                for(Piece piece : this.getUnderAttckBy()){
+                    //check if the king and the attacking piece and the current piece im trying ot move are on the same column
+                    if(utils.getColumnLabel(this.piecePosition).equals(utils.getColumnLabel(k.getPosition()))&&utils.getColumnLabel(piece.getPosition()).equals(utils.getColumnLabel(k.getPosition()))){
+                        HashSet<Integer> betweenKingAndPiece = utils.getPiecesInBetween(k.getPosition(), piece.getPosition());
+                        isColumn=true;
+                        for(int val : betweenKingAndPiece){
+                            if(board.getTile(val).isOccupied()&&!board.getTile(val).getPiece().equals(this)){
+                                otherPiecebetween=true;
+                            }
+                        }
+                    }
+                    else if(utils.getRowLabel(current)==utils.getRowLabel(k.getPosition())&&utils.getRowLabel(k.getPosition())==utils.getRowLabel(piece.getPosition())){
+                        HashSet<Integer> betweenKingAndPiece = utils.getPiecesInBetween(k.getPosition(), piece.getPosition());
+                        isRow=true;
+                        for(int val : betweenKingAndPiece){
+                            if(board.getTile(val).isOccupied()&&!board.getTile(val).getPiece().equals(this)){
+                                otherPiecebetween=true;
+                            }
+                        }
+                    }
+                    else if(utils.areOnSameDiagonal(current, piece.getPosition())&&utils.areOnSameDiagonal(piece.getPosition(), k.getPosition())){
+                        //the utils to get the diagonal is messed up i haev to check whats going on it with it
+                    }
+
+
+                }
+                if(!otherPiecebetween&&isColumn){
+                    continue;
+                }
+                else if(!otherPiecebetween&&isRow){
+                    continue;
+                }
+                else if(!otherPiecebetween&&isDiagonal){
+                    continue;
+                }
+                
+
+                
+            }
             
 
             

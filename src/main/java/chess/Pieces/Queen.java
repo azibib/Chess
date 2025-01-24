@@ -32,12 +32,13 @@ public class Queen extends Piece{
         for(int i : move_Coordinants){
             int current = this.piecePosition;
             Tile t = board.getTile(i+current);
-            King k = board.getKing(this.pieceAlliance);
-            int difference = k.getPosition()-this.piecePosition;
+           
+            
 
             if(t==null){continue;}
             
             if(this.getUnderAttack()){
+                King k = board.getKing(this.pieceAlliance);
                 boolean otherPiecebetween = false;
                 boolean isColumn = false;
                 boolean isRow = false;
