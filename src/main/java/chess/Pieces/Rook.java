@@ -41,6 +41,7 @@ public class Rook extends Piece{
                 boolean otherPiecebetween = false;
                 boolean isColumn = false;
                 boolean isRow = false;
+                boolean isDiagonal = false;
                 for(Piece piece : this.getUnderAttckBy()){
                     //check if the king and the attacking piece and the current piece im trying ot move are on the same column
                     if(utils.getColumnLabel(this.piecePosition).equals(utils.getColumnLabel(k.getPosition()))&&utils.getColumnLabel(piece.getPosition()).equals(utils.getColumnLabel(k.getPosition()))){
@@ -61,6 +62,9 @@ public class Rook extends Piece{
                             }
                         }
                     }
+                    else if(utils.areOnSameDiagonal(current, piece.getPosition())&&utils.areOnSameDiagonal(piece.getPosition(), k.getPosition())){
+                        //the utils to get the diagonal is messed up i haev to check whats going on it with it
+                    }
 
 
                 }
@@ -70,6 +74,10 @@ public class Rook extends Piece{
                 else if(!otherPiecebetween&&isRow&&(i==-8||i==8)){
                     continue;
                 }
+                else if(!otherPiecebetween&&isDiagonal){
+                    continue;
+                }
+                
 
                 
             }
