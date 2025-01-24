@@ -225,4 +225,96 @@ public class BoardUtils {
         
         return Math.abs(row1 - row2) == Math.abs(col1 - col2);
     }
+
+
+    public HashSet<Integer> getPiecesInBetween(int pieceOne, int pieceTwo){
+        HashSet<Integer> set = new HashSet<>();
+        boolean column = this.getColumnLabel(pieceTwo).equals(this.getColumnLabel(pieceOne));
+        boolean row = this.getRowLabel(pieceTwo)==this.getRowLabel(pieceOne);
+        
+        int difference = pieceOne-pieceTwo;
+        if(column){
+           if(difference<0){
+                int count=pieceOne+8;
+                while(count<pieceTwo){
+                    set.add(count);
+                    count+=8;
+                }
+                return set;
+           }
+           else{
+            int count=pieceOne-8;
+                while(count>pieceTwo){
+                    set.add(count);
+                    count-=8;
+                }
+                return set;
+           }
+        
+        }
+        if(row){
+            if(difference<0){
+                int count=pieceOne+1;
+                while(count<pieceTwo){
+                    set.add(count);
+                    count+=1;
+                }
+                return set;
+           }
+           else{
+            int count=pieceOne-1;
+                while(count>pieceTwo){
+                    set.add(count);
+                    count-=1;
+                }
+                return set;
+           }
+        }
+        else{
+            if(difference>0){
+                if(areOnSameDiagonal(pieceOne,pieceTwo-7)){
+                    int count = pieceTwo-7;
+                    while(count>pieceOne){
+                        set.add(count);
+                        count-=7;
+                    }
+                    return set;
+                }
+                if(areOnSameDiagonal(pieceOne,pieceTwo-9)){
+                    int count = pieceTwo-9;
+                    while(count>pieceOne){
+                        set.add(count);
+                        count-=9;
+                    }
+                    return set;
+                }
+
+            }
+            else{
+                if(areOnSameDiagonal( pieceOne,pieceTwo+7)){
+                    int count = pieceTwo+7;
+                    while(count<pieceOne){
+                        set.add(count);
+                        count+=7;
+                    }
+                    return set;
+                }
+                int count = pieceTwo+9;
+                while(count<pieceOne){
+                    set.add(count);
+                    count+=9;
+                }
+                return set;
+                
+            }
+            
+        }
+        return set;
+        
+
+
+
+        
+
+    }
 }

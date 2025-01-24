@@ -35,9 +35,10 @@ public class Rook extends Piece{
             int current = this.piecePosition;
             Tile t = board.getTile(current+i);
             King k = board.getKing(this.pieceAlliance);
-            int difference = k.getPosition()-this.piecePosition;
+            
             if(t==null){continue;}
             if(this.getUnderAttack()){
+                
                 
             }
             

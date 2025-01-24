@@ -1,15 +1,15 @@
 -------------------------------------------------------------------------------
 Test set: chess.Board.BoardTest
 -------------------------------------------------------------------------------
-Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.084 s <<< FAILURE! - in chess.Board.BoardTest
-chess.Board.BoardTest.testPieceBlockingCheck  Time elapsed: 0.008 s  <<< FAILURE!
-org.opentest4j.AssertionFailedError: expected: <1> but was: <8>
+Tests run: 2, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.112 s <<< FAILURE! - in chess.Board.BoardTest
+chess.Board.BoardTest.testPieceBlockingCheck  Time elapsed: 0.005 s  <<< FAILURE!
+org.opentest4j.AssertionFailedError: expected: <1> but was: <[21, 29]>
 	at org.junit.jupiter.api.AssertionUtils.fail(AssertionUtils.java:55)
 	at org.junit.jupiter.api.AssertionUtils.failNotEqual(AssertionUtils.java:62)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:150)
-	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:145)
-	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:527)
-	at chess.Board.BoardTest.testPieceBlockingCheck(BoardTest.java:52)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:182)
+	at org.junit.jupiter.api.AssertEquals.assertEquals(AssertEquals.java:177)
+	at org.junit.jupiter.api.Assertions.assertEquals(Assertions.java:1141)
+	at chess.Board.BoardTest.testPieceBlockingCheck(BoardTest.java:66)
 	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:103)
 	at java.base/java.lang.reflect.Method.invoke(Method.java:580)
 	at org.junit.platform.commons.util.ReflectionUtils.invokeMethod(ReflectionUtils.java:725)

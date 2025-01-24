@@ -32,7 +32,7 @@ public class Main{
         Queen r5 = new Queen(15, Alliance.Black);
         King kig = new King(36, Alliance.Black);
         Bishop b = new Bishop(0, Alliance.Black);
-        Rook r3 = new Rook(39, Alliance.Black);
+        Rook r3 = new Rook(37, Alliance.Black);
         Knight k = new Knight(2, Alliance.White);
 
 
@@ -47,7 +47,7 @@ public class Main{
         board.setPiece((Piece)k,2);
         board.setPiece((Piece)r1,13);
         board.setPiece((Piece)r2,14);
-        board.setPiece((Piece)r3,39);
+        board.setPiece((Piece)r3,37);
 
         Table table = new Table(board);
         
