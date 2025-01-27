@@ -395,6 +395,14 @@ public class Board{
             
             HashSet<Piece> pieces = this.getPieceCheckingKing();//get me all the pieces checking the king
             for(Piece p : pieces){//for ech of the pieces checking the king
+                if(p instanceof Pawn){
+                    if(p.getAlliance()==Alliance.White){
+                        allTilesPiecesCantMoveTo.add(p.getPosition()+8);
+                        
+                    }else{
+                        allTilesPiecesCantMoveTo.add(p.getPosition()-8);
+                    }
+                }
                 for(Move move : p.calculateMoves(this)){//calculate their moves
                     allTilesPiecesCantMoveTo.add(move.newTile());//add the tiles to the invalid tiles set
                     
