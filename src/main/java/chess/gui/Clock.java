@@ -8,12 +8,14 @@ import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
+import chess.Pieces.Alliance;
+
 public class Clock extends JPanel{
     private int time = 600;
     private Timer timeT;
     JLabel timeLabel = new JLabel();
     
-    public Clock() throws InterruptedException{
+    public Clock(Alliance alliance) throws InterruptedException{
         this.setPreferredSize(new Dimension(60,20));
         
         timeLabel.setFont(new Font("Small", Font.BOLD, 12));
@@ -27,7 +29,10 @@ public class Clock extends JPanel{
                 int seconds = time%60;
             
                 timeLabel.setText(time/60+ ":"+time%60);
-               
+                if(time==0){
+                    timeT.stop();
+                    JOptionPane.showMessageDialog(null, alliance + " has won the game" ,"WINNER" ,JOptionPane.NO_OPTION);
+                }
                 
                 
             }

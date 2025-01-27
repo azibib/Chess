@@ -43,8 +43,8 @@ public class Table{
     private lostPiece lostPiecePanel;
     private BoardUtils utils;
     private boolean ispractice = false;
-    private Clock Player1 = new Clock();
-    private Clock Player2 = new Clock();
+    private Clock Player1 = new Clock(Alliance.Black);
+    private Clock Player2 = new Clock(Alliance.White);
     private JPanel buttonPanel;
     private HashMap<Integer,JTile> tileMap = new HashMap<>();
     
@@ -149,8 +149,8 @@ public class Table{
     private void buttonPanelSetUP(){
         buttonPanel.removeAll();
         try {
-            Player1 = new Clock();
-            Player2 = new Clock();
+            Player1 = new Clock(Alliance.White);
+            Player2 = new Clock(Alliance.Black);
         } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -284,7 +284,7 @@ public class Table{
                     if(Player1.getTime()<=0||Player2.getTime()<=0){
                     
                         try {
-                            extracted(board.getTurn());
+                            extracted(board.getTurn(),true);
                         } catch (InterruptedException e1) {
                             // TODO Auto-generated catch block
                             e1.printStackTrace();
@@ -384,7 +384,7 @@ public class Table{
                     if(Player1.getTime()<=0||Player2.getTime()<=0){
                     
                         try {
-                            extracted(board.getTurn());
+                            extracted(board.getTurn(),true);
                         } catch (InterruptedException e1) {
                             // TODO Auto-generated catch block
                             e1.printStackTrace();
@@ -408,7 +408,7 @@ public class Table{
                     if(Player1.getTime()<=0||Player2.getTime()<=0){
                     
                         try {
-                            extracted(board.getTurn());
+                            extracted(board.getTurn(),true);
                         } catch (InterruptedException e1) {
                             // TODO Auto-generated catch block
                             e1.printStackTrace();
@@ -518,7 +518,7 @@ public class Table{
                                 
                                     
                                 try {
-                                    extracted(lost.getAlliance());
+                                    extracted(lost.getAlliance(),false);
                                 } catch (InterruptedException e1) {
                                     // TODO Auto-generated catch block
                                     e1.printStackTrace();
@@ -636,8 +636,18 @@ public class Table{
 
 
                 }
-                private void extracted(Alliance lost) throws InterruptedException {
-                                    if(lost==Alliance.White){
+                private void extracted(Alliance lost, boolean timeisup) throws InterruptedException {
+                                    if(timeisup){
+                                        board = new Board();
+                                        board.createBoard();
+                                        lostPieces = new ArrayList<>();
+                                        moves = new ArrayList<>();
+                                        mainPanelSetUP();
+                                        sidePanel.sidePanelSetUP();
+                                        lostPiecePanel.lostPiecePanelSetUP();
+                                        buttonPanelSetUP();
+                                    }
+                                    else if(lost==Alliance.White){
                                         Player1.getTimer().stop();
                                         Player2.getTimer().stop();
                                         JOptionPane.showMessageDialog(frame, "Black Has Won The Game", "WINNER", JOptionPane.NO_OPTION);
