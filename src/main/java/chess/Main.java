@@ -23,7 +23,7 @@ public class Main{
         
         
         Table t = new Table();
-        Board board = new Board();
+        /*Board board = new Board();
         board.createBoard();
         for(int i =0;i<64;i++){board.unOccupy(i);}
         King king = new King(12, Alliance.White);
@@ -50,6 +50,8 @@ public class Main{
         board.setPiece((Piece)r3,37);
 
         Table table = new Table(board);
+
+        */
         
         
 
