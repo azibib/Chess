@@ -16,7 +16,7 @@ public class Clock extends JPanel{
     public Clock() throws InterruptedException{
         this.setPreferredSize(new Dimension(60,20));
         
-        timeLabel.setFont(new Font("Small", Font.BOLD, 10));
+        timeLabel.setFont(new Font("Small", Font.BOLD, 12));
         
         timeT = new Timer(1000, new ActionListener() {
 
@@ -26,7 +26,7 @@ public class Clock extends JPanel{
                 int min = time/60;
                 int seconds = time%60;
             
-                timeLabel.setText("Time: "+ time/60+ ":"+time%60);
+                timeLabel.setText(time/60+ ":"+time%60);
                 
                 
             }
