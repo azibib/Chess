@@ -271,7 +271,7 @@ public class BoardUtils {
            }
         }
         else{
-            if(difference>0){
+            if(difference<0){
                 if(areOnSameDiagonal(pieceOne,pieceTwo-7)){
                     int count = pieceTwo-7;
                     while(count>pieceOne){

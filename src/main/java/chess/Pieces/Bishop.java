@@ -26,12 +26,14 @@ public class Bishop extends Piece{
 
     @Override
     public List<Move> calculateMoves(Board board) {
+        
         List<Move> legalMoves = new ArrayList<>();
         for(int i : move_Coordinants){
             int current = this.piecePosition;
             Tile t = board.getTile(i+current);
             if(t==null){continue;}
             if(this.getUnderAttack()){
+                boolean di = false;
                 King k = board.getKing(pieceAlliance);
                 boolean otherPiecebetween = false;
                 boolean isColumn = false;
@@ -58,7 +60,22 @@ public class Bishop extends Piece{
                         }
                     }
                     else if(utils.areOnSameDiagonal(current, piece.getPosition())&&utils.areOnSameDiagonal(piece.getPosition(), k.getPosition())){
-                        //the utils to get the diagonal is messed up i haev to check whats going on it with it
+                        HashSet<Integer> betweenKingAndPiece = utils.getPiecesInBetween(k.getPosition(), piece.getPosition());
+                        isDiagonal=true;
+                        
+                        for(int val : betweenKingAndPiece){
+                            if(board.getTile(val).isOccupied()&&!board.getTile(val).getPiece().equals(this)){
+                                otherPiecebetween=true;
+                                
+                            }
+                            if(utils.areOnSameDiagonal(k.getPosition(),piecePosition+i)){
+                                di = true;
+                            }
+                            
+                            
+                            
+                            
+                        }
                     }
 
 
@@ -70,7 +87,7 @@ public class Bishop extends Piece{
                     continue;
                 }
                 else if(!otherPiecebetween&&isDiagonal){
-                    continue;
+                    if(!di){continue;}
                 }
                 
 

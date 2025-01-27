@@ -40,6 +40,7 @@ public class Knight extends Piece {
             if(t==null){continue;}
             
             if(this.getUnderAttack()){
+                boolean di = false;
                 King k = board.getKing(pieceAlliance);
                 boolean otherPiecebetween = false;
                 boolean isColumn = false;
@@ -66,7 +67,22 @@ public class Knight extends Piece {
                         }
                     }
                     else if(utils.areOnSameDiagonal(current, piece.getPosition())&&utils.areOnSameDiagonal(piece.getPosition(), k.getPosition())){
-                        //the utils to get the diagonal is messed up i haev to check whats going on it with it
+                        HashSet<Integer> betweenKingAndPiece = utils.getPiecesInBetween(k.getPosition(), piece.getPosition());
+                        isDiagonal=true;
+                        
+                        for(int val : betweenKingAndPiece){
+                            if(board.getTile(val).isOccupied()&&!board.getTile(val).getPiece().equals(this)){
+                                otherPiecebetween=true;
+                                
+                            }
+                            if(utils.areOnSameDiagonal(k.getPosition(),piecePosition+i)){
+                                di = true;
+                            }
+                            
+                            
+                            
+                            
+                        }
                     }
 
 
@@ -78,7 +94,8 @@ public class Knight extends Piece {
                     continue;
                 }
                 else if(!otherPiecebetween&&isDiagonal){
-                    continue;
+                    if(i==-1||i==1||i==-8||i==8){continue;}
+                    if(!di){continue;}
                 }
                 
 
