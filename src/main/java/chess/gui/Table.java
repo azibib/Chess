@@ -119,15 +119,7 @@ public class Table{
         //scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         JScrollBar vertical = scroll.getVerticalScrollBar();
         vertical.setPreferredSize(new Dimension(6,36));
-        vertical.setUI(new BasicScrollBarUI() {
-            
-
-            @Override
-            protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
-                g.setColor(new Color(191, 133, 90)); // Color for the background of the scrollbar
-                g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
-            }
-        });
+        
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         frame.add(scroll, BorderLayout.EAST);
 
