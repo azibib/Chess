@@ -96,6 +96,9 @@ public class Move {
                     board.getTile(i).getPiece().setUnderAttack(false);
 
                 }
+                if(board.getTile(i).isOccupied()){
+                    board.getTile(i).getPiece().calculateMoves(board);
+                }
             }
             
             return piece;//returns the piece that just made the move

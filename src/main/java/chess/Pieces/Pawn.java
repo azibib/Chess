@@ -115,7 +115,7 @@ public class Pawn extends Piece{
                 else if(!otherPiecebetween&&isRow){
                     continue;
                 }
-                else if(!otherPiecebetween&&isDiagonal){
+                else if((!otherPiecebetween)&&isDiagonal){
                     if(i==-1||i==1||i==-8||i==8||i==16||i==-16){continue;}
                     if(di){continue;}
                 }
@@ -165,7 +165,7 @@ public class Pawn extends Piece{
 
             else if(t.getPiece().getAlliance()!=this.pieceAlliance){
 
-
+                
                 legalMoves.add(new Move(current,i+current,this,board));
             }
         }

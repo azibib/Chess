@@ -110,6 +110,9 @@ public class Knight extends Piece {
                 if(utils.getRow(current).contains(i+current)){continue;}
                 else{
                     if(t.getPiece()!=null&&t.getPiece().getAlliance()==pieceAlliance){continue;}
+                    if(board.getTile(i+current).isOccupied()){
+                        board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                    }
                     legalMoves.add(new Move(current,i+current,this,board));
                 }
             }
@@ -127,6 +130,9 @@ public class Knight extends Piece {
                 }
                 
                 if(t.getPiece()!=null&&t.getPiece().getAlliance()==pieceAlliance){continue;}
+                if(board.getTile(i+current).isOccupied()){
+                    board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                }
                 legalMoves.add(new Move(current,i+current,this,board));
                 
             }else if(i==-15||i==15){
@@ -143,6 +149,9 @@ public class Knight extends Piece {
                 }
                 
                 if(t.getPiece()!=null&&t.getPiece().getAlliance()==pieceAlliance){continue;}
+                if(board.getTile(i+current).isOccupied()){
+                    board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                }
                 legalMoves.add(new Move(current,i+current,this,board));
                 
             }else if(i==-17||i==17){
@@ -159,6 +168,9 @@ public class Knight extends Piece {
                 }
                 
                 if(t.getPiece()!=null&&t.getPiece().getAlliance()==pieceAlliance){continue;}
+                if(board.getTile(i+current).isOccupied()){
+                    board.getTile(current+i).getPiece().setUnderAttack(true, this);
+                }
                 legalMoves.add(new Move(current,i+current,this,board));
                 
             }
