@@ -27,14 +27,19 @@ public class Clock extends JPanel{
                 int seconds = time%60;
             
                 timeLabel.setText(time/60+ ":"+time%60);
+               
                 
                 
             }
+
+            
             
         });
+        
         this.add(timeLabel);
         timeLabel.repaint();
         timeLabel.revalidate();
+        
     
         
         
@@ -42,6 +47,9 @@ public class Clock extends JPanel{
 
     public Timer getTimer(){
         return timeT;
+    }
+    public int getTime(){
+        return time;
     }
 
         
