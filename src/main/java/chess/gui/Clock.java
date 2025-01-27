@@ -2,76 +2,49 @@ package chess.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 
-public class Clock extends JPanel implements Runnable{
+public class Clock extends JPanel{
     private int time = 600;
-    private Thread thread;
-    private boolean running =true;
+    private Timer timeT;
+    JLabel timeLabel = new JLabel();
+    
     public Clock() throws InterruptedException{
-
-        this.setPreferredSize(new Dimension(40,20));
+        this.setPreferredSize(new Dimension(60,20));
         
+        timeLabel.setFont(new Font("Small", Font.BOLD, 10));
+        
+        timeT = new Timer(1000, new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                time--;
+                int min = time/60;
+                int seconds = time%60;
+            
+                timeLabel.setText("Time: "+ time/60+ ":"+time%60);
+                
+                
+            }
+            
+        });
+        this.add(timeLabel);
+        timeLabel.repaint();
+        timeLabel.revalidate();
+    
+        
+        
+    }
+
+    public Timer getTimer(){
+        return timeT;
+    }
 
         
-
-    }
-    public synchronized void start() {
-        running = true;
-        if (thread == null || !thread.isAlive()) {
-            thread = new Thread(this);
-            thread.start();
-        }
-    }
-
-    public synchronized void stop() {
-        running = false;
-    }
-    @Override
-    public void run() {
-        while (time > 0) {
-            synchronized (this) {
-                if (!running) {
-                    try {
-                        // Wait while paused
-                        wait();
-                    } catch (InterruptedException e) {
-                        Thread.currentThread().interrupt();
-                        System.out.println("Clock interrupted!");
-                        return;
-                    }
-                }
-            }
-
-            // Timer logic when running
-            int min = time / 60;
-            int sec = time % 60;
-
-            // Update label
-            JLabel label = new JLabel(String.format("%02d:%02d", min, sec));
-            this.removeAll();
-            this.add(label);
-            this.revalidate();
-            this.repaint();
-
-            // Decrement time
-            time--;
-
-            try {
-                Thread.sleep(1000); // Delay 1 second
-            } catch (InterruptedException e) {
-                Thread.currentThread().interrupt();
-                System.out.println("Clock interrupted!");
-                return;
-            }
-        }
-    }
-    public synchronized void resumeClock() {
-        running = true;
-        notify(); // Wake the thread from wait()
-    }
 
 
 }

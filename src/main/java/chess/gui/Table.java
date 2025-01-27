@@ -1,39 +1,27 @@
 package chess.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
-
 import java.util.List;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import javax.swing.*;
+import javax.swing.plaf.basic.BasicScrollBarUI;
 
+import java.awt.*;
+import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 
 
 import javax.imageio.ImageIO;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-
 
 import chess.Board.Board;
 import chess.Board.BoardUtils;
@@ -55,6 +43,8 @@ public class Table{
     private lostPiece lostPiecePanel;
     private BoardUtils utils;
     private boolean ispractice = false;
+    private Clock Player1 = new Clock();
+    private Clock Player2 = new Clock();
     private HashMap<Integer,JTile> tileMap = new HashMap<>();
     
     private Piece piece;
@@ -63,64 +53,7 @@ public class Table{
     private JPanel main = new JPanel();
     
 
-    public Table(Board board){
-
-        if(board==null){throw new IllegalArgumentException("Board Cannot be null");}
-        ispractice =true;
-        this.board = board;
-        ArrayList<Piece> allLostPieces = lostPieces;
-        ArrayList<String> allMoves = moves;
-        
-        
-        
-
-        this.frame = new JFrame();
-        frame.setLayout(new BorderLayout());
-        JButton P1button = new JButton("Undo");
-        JButton P2button = new JButton("Undo");
-        P1button.setPreferredSize(new Dimension(80,25));
-        P2button.setPreferredSize(new Dimension(80,25));
-
-       
-        
-        
-
-        // Wrap the button in a panel with FlowLayout
-        JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        
-        buttonPanel.setBackground(new Color(191, 133, 90));
-        
-        
-        
-        
-       
-        
-        
-        
-        buttonPanel.add(P1button, BorderLayout.WEST);
-        
-        
-        
-        
-        
-        main.setLayout(new GridLayout(8,8));
-        mainPanelSetUP();
-        
-        
-        
-        frame.add(main,BorderLayout.CENTER);
-        frame.add(buttonPanel, BorderLayout.SOUTH);
-        sidePanel = new sidePanel();
-        lostPiecePanel = new lostPiece();
-        frame.add(sidePanel, BorderLayout.EAST);
-        frame.add(lostPiecePanel, BorderLayout.WEST);
-        
-        this.frame.setSize(new Dimension(600,600));
-        this.frame.setResizable(false);
-        this.frame.setVisible(true);
-        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-    }
+    
 
     public Table() throws InterruptedException{
         utils = new BoardUtils();
@@ -129,6 +62,7 @@ public class Table{
         this.board.createBoard();
         
         
+        
         ArrayList<Piece> allLostPieces = lostPieces;
         ArrayList<String> allMoves = moves;
         
@@ -158,7 +92,11 @@ public class Table{
         
         
         
+        buttonPanel.add(Player2, BorderLayout.NORTH);
         buttonPanel.add(P1button, BorderLayout.WEST);
+        buttonPanel.add(Player1, BorderLayout.EAST);
+        
+        
         
         
         P1button.addActionListener(new ActionListener() {
@@ -202,7 +140,28 @@ public class Table{
         frame.add(buttonPanel, BorderLayout.SOUTH);
         sidePanel = new sidePanel();
         lostPiecePanel = new lostPiece();
-        frame.add(sidePanel, BorderLayout.EAST);
+        JScrollPane scroll = new JScrollPane(sidePanel);
+        
+        
+        
+         
+         
+        //scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        JScrollBar vertical = scroll.getVerticalScrollBar();
+        vertical.setPreferredSize(new Dimension(6,36));
+        vertical.setUI(new BasicScrollBarUI() {
+            
+
+            @Override
+            protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+                g.setColor(new Color(191, 133, 90)); // Color for the background of the scrollbar
+                g.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
+            }
+        });
+        scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        frame.add(scroll, BorderLayout.EAST);
+
+        
         frame.add(lostPiecePanel, BorderLayout.WEST);
         
         this.frame.setSize(new Dimension(600,600));
@@ -525,8 +484,13 @@ public class Table{
                             }
                             if(board.getTurn()==Alliance.White){
                                 board.setTurn(Alliance.Black);
+                                Player2.getTimer().stop();
+                                
+                                Player1.getTimer().start();
                             }else{
                                 board.setTurn(Alliance.White);
+                                Player2.getTimer().start();
+                                Player1.getTimer().stop();
                             }
                            
                             if(lost!=null){
@@ -758,12 +722,7 @@ public class Table{
                 panels.add(p);
                 
             }
-            if(moves.size()>40){
-                JPanel p = new JPanel();
-                p.setPreferredSize(new Dimension(30,30));
-                JButton next = new JButton("next");
-                panels.add(p);
-            }
+            
             return panels;
             
         
