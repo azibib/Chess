@@ -281,7 +281,7 @@ public class Table{
 
             } catch (IOException e) {
                 
-                System.out.println("fuck you");
+                e.printStackTrace();
             }
 
             
@@ -452,16 +452,20 @@ public class Table{
                         
                         HashMap<Integer,Tile> allTiles = board.getBlockableSquares();
                         int count = 0;
+                        
                         if(allTiles!=null){
                             
                             for(Move move : piece.calculateMoves(board)){
                                 if(allTiles.get(move.newTile())!=null){count++;}
                             }
                             if(piece instanceof King){
+                                
                                 count++;
                             }
                             if(count==0){return;}
+                            
                         }
+                        
                         
                         
                         
@@ -536,27 +540,7 @@ public class Table{
 
                                 
                                     
-                                if(lost.getAlliance()==Alliance.White){
-                                    JOptionPane.showMessageDialog(frame, "Black Has Won The Game", "WINNER", JOptionPane.NO_OPTION);
-                                    board = new Board();
-                                    board.createBoard();
-                                    lostPieces = new ArrayList<>();
-                                    moves = new ArrayList<>();
-                                    mainPanelSetUP();
-                                    sidePanel.sidePanelSetUP();
-                                    lostPiecePanel.lostPiecePanelSetUP();
-                                    
-                                }else if(lost.getAlliance()==Alliance.Black){
-                                    JOptionPane.showMessageDialog(frame, "White Has Won The Game", "WINNER", JOptionPane.NO_OPTION);
-                                    board = new Board();
-                                    board.createBoard();
-                                    lostPieces = new ArrayList<>();
-                                    moves = new ArrayList<>();
-                                    mainPanelSetUP();
-                                    sidePanel.sidePanelSetUP();
-                                    lostPiecePanel.lostPiecePanelSetUP();
-                                    
-                                }
+                                extracted(lost);
                                     
                                 
                                 
@@ -670,6 +654,29 @@ public class Table{
 
 
                 }
+                private void extracted(Piece lost) {
+                    if(lost.getAlliance()==Alliance.White){
+                        JOptionPane.showMessageDialog(frame, "Black Has Won The Game", "WINNER", JOptionPane.NO_OPTION);
+                        board = new Board();
+                        board.createBoard();
+                        lostPieces = new ArrayList<>();
+                        moves = new ArrayList<>();
+                        mainPanelSetUP();
+                        sidePanel.sidePanelSetUP();
+                        lostPiecePanel.lostPiecePanelSetUP();
+                        
+                    }else if(lost.getAlliance()==Alliance.Black){
+                        JOptionPane.showMessageDialog(frame, "White Has Won The Game", "WINNER", JOptionPane.NO_OPTION);
+                        board = new Board();
+                        board.createBoard();
+                        lostPieces = new ArrayList<>();
+                        moves = new ArrayList<>();
+                        mainPanelSetUP();
+                        sidePanel.sidePanelSetUP();
+                        lostPiecePanel.lostPiecePanelSetUP();
+                        
+                    }
+                }
             });
         }
 
@@ -740,15 +747,22 @@ public class Table{
 
         private ArrayList<JPanel> newMove(){
             ArrayList<JPanel> panels = new ArrayList<>();
+            
             for(String move : moves){
                 JPanel p = new JPanel();
-                p.setPreferredSize(new Dimension(15,18));
+                p.setPreferredSize(new Dimension(18,18));
                 JLabel label = new JLabel(move);
                 p.setBackground(new Color(191, 133, 90));
                 label.setFont(new Font("small", Font.PLAIN,9));
                 p.add(label);
                 panels.add(p);
                 
+            }
+            if(moves.size()>40){
+                JPanel p = new JPanel();
+                p.setPreferredSize(new Dimension(30,30));
+                JButton next = new JButton("next");
+                panels.add(p);
             }
             return panels;
             

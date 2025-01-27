@@ -126,8 +126,8 @@ public class Pawn extends Piece{
             if((i==7||i==-7)&&!t.isOccupied()){continue;}
             else if((i==9||i==-9)&&!t.isOccupied()){continue;}
             else if((i==8||i==-8)&&t.isOccupied()){continue;}
-            else if((i==16)&&(t.isOccupied()||t.isOccupied())){continue;}
-            else if((i==-16)&&(t.isOccupied()||t.isOccupied())){continue;}
+            else if((i==16)&&(t.isOccupied()||board.getTile(current+8).isOccupied())){continue;}
+            else if((i==-16)&&(t.isOccupied()||board.getTile(current-8).isOccupied())){continue;}
             else if((i==-16||i==16)&&current!=innitPosition){continue;}
             else if(i==-7||i==7||i==9||i==-9){
                 HashSet<Integer> currCol = utils.getColomn(current);
@@ -150,6 +150,7 @@ public class Pawn extends Piece{
                 }else if(board.getTile(i+current).getPiece().getAlliance()==this.pieceAlliance){
                     continue;
                 }
+                
                 else{
                     legalMoves.add(new Move(current,i+current,this,board));
                 }
