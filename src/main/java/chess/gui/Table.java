@@ -149,8 +149,15 @@ public class Table{
         }
         
         buttonPanel.add(Player2, BorderLayout.NORTH);
-        
+        JPanel panel = new JPanel();
+        panel.setBackground(new Color(191, 133, 90));
+        panel.setPreferredSize(new Dimension(320,10));
+        buttonPanel.add(panel, BorderLayout.CENTER);
         buttonPanel.add(Player1, BorderLayout.SOUTH);
+        JPanel p = new JPanel();
+        p.setBackground(new Color(191, 133, 90));
+        p.setPreferredSize(new Dimension(40,10));
+        buttonPanel.add(p, BorderLayout.WEST);
         buttonPanel.revalidate();
         buttonPanel.repaint();
     }
@@ -283,7 +290,7 @@ public class Table{
                         }
                     }
                     if(haspiece){return;}
-                    int i =0;
+                    
                     
                     if(!panel.tile.isOccupied()){return;}//if theres no piece on the panel youre currently looking at
                     Piece tempPiece = board.getTile(ID).getPiece();
@@ -316,7 +323,7 @@ public class Table{
                                 return;
                             }
                             Alliance a = tempPiece.getAlliance()==Alliance.White ?Alliance.Black:Alliance.White;
-                            King k = board.getKing(a);
+                            
                             
                             if(allTiles!=null){
                                 
@@ -343,6 +350,7 @@ public class Table{
                             List<Move> al = tempPiece.calculateMoves(board);
                             if(tempPiece instanceof King&&allTiles!=null){
                                 al = board.kingCanMoveToTheseTilesDuringCheck();
+                                
                                 count = 0;
                             }
                             

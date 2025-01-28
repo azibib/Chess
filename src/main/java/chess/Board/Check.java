@@ -36,6 +36,7 @@ public class Check {
 
         for(Piece p : set){
             for(Move move : p.calculateMoves(board)){
+                
                 if(move.newTile()==king.getPosition()){
                     return true;
                 }

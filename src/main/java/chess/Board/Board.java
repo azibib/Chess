@@ -288,8 +288,9 @@ public class Board{
 
 
         public HashMap<Integer,Tile> getBlockableSquares(){
+            if(isInCheck() ==null){return null;}
             King king = (King) isInCheck();
-            if(king ==null){return null;}
+            
             HashSet<Piece> pieces = getPieceCheckingKing();
             HashMap<Integer,Tile> allTiles= new HashMap<>();
             
@@ -397,10 +398,10 @@ public class Board{
             for(Piece p : pieces){//for ech of the pieces checking the king
                 if(p instanceof Pawn){
                     if(p.getAlliance()==Alliance.White){
-                        allTilesPiecesCantMoveTo.add(p.getPosition()+8);
+                        moves.add(new Move(king.getPosition(), p.getPosition()-8, king, this));
                         
                     }else{
-                        allTilesPiecesCantMoveTo.add(p.getPosition()-8);
+                        moves.add(new Move(king.getPosition(), p.getPosition()+8, king, this));
                     }
                 }
                 for(Move move : p.calculateMoves(this)){//calculate their moves
@@ -411,8 +412,10 @@ public class Board{
             for(Move move : king.calculateMoves(this)){//for each move the king can make
                 if(!allTilesPiecesCantMoveTo.contains(move.newTile())){//if the invalid tiles set doesnt contain the current tile im looking to move to 
                     moves.add(move);//add that as a possible position
+
                 }
             }
+            
             
             return moves;
         }
