@@ -58,6 +58,16 @@ public class King extends Piece{
             int current = this.piecePosition;
             Tile t = board.getTile(current+i);
             if(t==null){continue;}
+            if(this.pieceAlliance==Alliance.Black&&board.getTile(current+8)!=null&&board.getTile(current+8).isOccupied()&&board.getTile(current+8).getPiece() instanceof Pawn&&board.getTile(current+8).getPiece().getAlliance()!=this.pieceAlliance){
+                if(i==1||i==-1){
+                    continue;
+                }
+            }
+            if(this.pieceAlliance==Alliance.White&&board.getTile(current-8)!=null&&board.getTile(current-8).isOccupied()&&board.getTile(current-8).getPiece() instanceof Pawn&&board.getTile(current-8).getPiece().getAlliance()!=this.pieceAlliance){
+                if(i==-1||i==1){
+                    continue;
+                }
+            }
             HashSet<Integer> row = utils.getRow(current+i);//make sure ot check that there is no piece that attacks staright in the row that could hurt me
             HashSet<Integer> column = utils.getColomn(i+current);//make sure there sint a piece that can attack straight that can hurt me
             HashSet<Integer> contains = new HashSet<>();//ad those values to be checked here so i know where to skip over them or not
