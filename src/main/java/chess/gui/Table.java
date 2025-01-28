@@ -356,9 +356,7 @@ public class Table{
                             
                             
                             for(Move move : al){
-                                if(move instanceof SpecialMove){
-                                    System.out.println(move.newTile());
-                                }
+                                
                                 JTile t = tileMap.get(move.newTile());
                                 if(t==null){continue;}
                                 if(count>0){
