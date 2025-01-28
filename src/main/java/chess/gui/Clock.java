@@ -27,8 +27,14 @@ public class Clock extends JPanel{
                 time--;
                 int min = time/60;
                 int seconds = time%60;
-            
-                timeLabel.setText(time/60+ ":"+time%60);
+
+                if(seconds<10){
+                    timeLabel.setText(min+ ":0"+seconds);
+                }
+                else{
+                    timeLabel.setText(min+ ":"+seconds);
+                }
+                
                 if(time==0){
                     timeT.stop();
                     JOptionPane.showMessageDialog(null, alliance + " has won the game" ,"WINNER" ,JOptionPane.NO_OPTION);

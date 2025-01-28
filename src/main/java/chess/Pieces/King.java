@@ -44,11 +44,20 @@ public class King extends Piece{
                     cantMove.add(move.newTile());
                 }
                 
-                if(p instanceof Pawn&&(move.newTile()!=p.getPosition()+8||move.newTile()!=p.getPosition()-8)){
-                    
-                    cantMove.add(move.newTile()-1);
-                    cantMove.add(move.newTile()+1);
-                    
+                if(p instanceof Pawn){
+                    if(board.getTile(piecePosition+1)!=null&&board.getTile(piecePosition+1).isOccupied()&&board.getTile(piecePosition+1).getPiece().equals(p)){
+                        if(p.getAlliance()==Alliance.White){
+                            cantMove.add(piecePosition-8);
+                            if(piecePosition+8==32){
+                                System.out.println("other here");
+                            }
+                        }else{
+                            cantMove.add(piecePosition+8);
+                            if(piecePosition+8==32){
+                                System.out.println("here");
+                            }
+                        }
+                    }
                 }
             }
             
@@ -68,8 +77,26 @@ public class King extends Piece{
                     continue;
                 }
             }
-            HashSet<Integer> row = utils.getRow(current+i);//make sure ot check that there is no piece that attacks staright in the row that could hurt me
-            HashSet<Integer> column = utils.getColomn(i+current);//make sure there sint a piece that can attack straight that can hurt me
+            if(pieceAlliance==Alliance.Black&&board.getTile(16-1+current)!=null&&board.getTile(15+current).isOccupied()&&board.getTile(15+current).getPiece() instanceof Pawn&&board.getTile(15+current).getPiece().getAlliance()!=this.pieceAlliance){
+                if(i==8){
+                    continue;
+                }
+            } 
+            if(pieceAlliance==Alliance.Black&&board.getTile(17+current)!=null&&board.getTile(17+current).isOccupied()&&board.getTile(17+current).getPiece() instanceof Pawn&&board.getTile(17+current).getPiece().getAlliance()!=this.pieceAlliance){
+                if(i==8){
+                    continue;
+                }
+            } else if(pieceAlliance==Alliance.White&&board.getTile(-15+current)!=null&&board.getTile(-15+current).isOccupied()&&board.getTile(-15+current).getPiece() instanceof Pawn&&board.getTile(-15+current).getPiece().getAlliance()!=this.pieceAlliance){
+                if(i==-8){
+                    continue;
+                }
+            } else if(pieceAlliance==Alliance.White&&board.getTile(-17+current)!=null&&board.getTile(-17+current).isOccupied()&&board.getTile(-17+current).getPiece() instanceof Pawn&&board.getTile(-17+current).getPiece().getAlliance()!=this.pieceAlliance){
+                if(i==-8){
+                    continue;
+                }
+            }
+            
+            
             HashSet<Integer> contains = new HashSet<>();//ad those values to be checked here so i know where to skip over them or not
             if(this.getUnderAttack()){
                 int count=0;
