@@ -101,6 +101,23 @@ public class Pawn extends Piece{
                             if(utils.areOnSameDiagonal(k.getPosition(),piecePosition+i)){
                                 di = true;
                             }
+                            if(piecePosition+i==piece.getPosition()){
+                                int minA = 100;
+                                int minB = 100;
+                                for(int w : utils.getColomn(piecePosition)){
+                                    if(w<minA){
+                                        minA=w;
+                                    }
+                                }
+                                for(int w : utils.getColomn(piece.getPosition())){
+                                    if(w<minB){
+                                        minB=w;
+                                    }
+                                }
+                                if(Math.abs(minA-minB)==1&&utils.areOnSameDiagonal(piece.getPosition(), i+current)){
+                                    legalMoves.add(new Move(current,i+current,this,board));
+                                }
+                            }
                             
                             
                             
@@ -118,7 +135,9 @@ public class Pawn extends Piece{
                 }
                 else if((!otherPiecebetween)&&isDiagonal){
                     if(i==-1||i==1||i==-8||i==8||i==16||i==-16){continue;}
-                    if(di){continue;}
+                    
+                    else if(!di){continue;}
+                    
                 }
                 
 

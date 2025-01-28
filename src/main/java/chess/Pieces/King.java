@@ -80,6 +80,7 @@ public class King extends Piece{
                             if(!board.getTile(i+current).isOccupied()){count++;}
                         }
                     }
+                    
                 }
                 if(count>0){continue;}
                 
@@ -112,7 +113,7 @@ public class King extends Piece{
         
         Castling castlingRight = null;
         Castling castlingLeft = null;
-        if(!hasMoved){ 
+        if(!hasMoved&&getUnderAttack()==false){ 
              
             if(this.pieceAlliance==Alliance.Black){
                 

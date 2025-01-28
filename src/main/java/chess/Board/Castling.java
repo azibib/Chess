@@ -29,6 +29,7 @@ public class Castling  {
         if(tile == null){
             canCastle = false;
         }
+        
         else if(tile.getPiece()==null||!(tile.getPiece() instanceof Rook)){
             canCastle = false;
         }else{
