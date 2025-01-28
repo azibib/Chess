@@ -29,9 +29,17 @@ public class Clock extends JPanel{
                 int seconds = time%60;
 
                 if(seconds<10){
+                    if(min<1){
+                        timeLabel.setForeground(Color.RED);
+                        
+                    }
                     timeLabel.setText(min+ ":0"+seconds);
                 }
                 else{
+                    if(min<1){
+                        timeLabel.setForeground(Color.RED);
+                        
+                    }
                     timeLabel.setText(min+ ":"+seconds);
                 }
                 

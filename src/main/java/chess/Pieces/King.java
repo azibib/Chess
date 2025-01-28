@@ -48,14 +48,10 @@ public class King extends Piece{
                     if(board.getTile(piecePosition+1)!=null&&board.getTile(piecePosition+1).isOccupied()&&board.getTile(piecePosition+1).getPiece().equals(p)){
                         if(p.getAlliance()==Alliance.White){
                             cantMove.add(piecePosition-8);
-                            if(piecePosition+8==32){
-                                System.out.println("other here");
-                            }
+                            
                         }else{
                             cantMove.add(piecePosition+8);
-                            if(piecePosition+8==32){
-                                System.out.println("here");
-                            }
+                            
                         }
                     }
                 }
