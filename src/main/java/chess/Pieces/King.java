@@ -113,23 +113,28 @@ public class King extends Piece{
         Castling castlingRight = null;
         Castling castlingLeft = null;
         if(!hasMoved){ 
-            if(pieceAlliance!=board.getTurn()){return  Collections.unmodifiableList(legalMoves); } 
-            if(this.piecePosition==4&&this.pieceAlliance==Alliance.Black){
+             
+            if(this.pieceAlliance==Alliance.Black){
+                
                 castlingRight = new Castling(this,board.getTile(7),board);//get the rook on the far right of the board
+                
                 castlingLeft = new Castling(this, board.getTile(0), board);//get the rook on the far left of the board
+                
                 if(castlingRight.canCastle()){//if the rook can castle
                     SpecialMove  move = new SpecialMove(this.piecePosition,6,this,board);
                     legalMoves.add(move);
                 }
                 if(castlingLeft.canCastle()){
-                    SpecialMove move = new SpecialMove(this.piecePosition,2,this,board);
+                    
+                    SpecialMove move = new SpecialMove(this.piecePosition,1,this,board);
                     legalMoves.add(move);
                 }
 
                 
                 
             }
-            else if(this.piecePosition==60&&this.pieceAlliance==Alliance.White){
+            else if(this.pieceAlliance==Alliance.White){
+                
                 castlingRight = new Castling(this,board.getTile(63),board);//get the rook on the far right of the board
                 castlingLeft = new Castling(this, board.getTile(56), board);//get the rook on the far left of the board
                 if(castlingRight.canCastle()){//if the rook can castle
@@ -137,7 +142,7 @@ public class King extends Piece{
                     legalMoves.add(move);
                 }
                 if(castlingLeft.canCastle()){
-                    SpecialMove move = new SpecialMove(this.piecePosition,58,this,board);
+                    SpecialMove move = new SpecialMove(this.piecePosition,57,this,board);
                     legalMoves.add(move);
                 }
             }

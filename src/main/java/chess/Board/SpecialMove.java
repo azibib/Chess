@@ -62,12 +62,12 @@ public class SpecialMove extends Move {
                 board.Occupy(5, p);
                 
                 
-            }else if(newPosition==2){//if the king is moving to the left
+            }else if(newPosition==1){//if the king is moving to the left
                 Rook p =(Rook)board.unOccupy(0);
                 p.setMoved(true);
                 
                 
-                board.Occupy(3, p);
+                board.Occupy(2, p);
                 
             }else if(newPosition==62){//if the king is moving to the right
                 
@@ -84,7 +84,7 @@ public class SpecialMove extends Move {
                 p.setMoved(true);
                 
                 
-                board.Occupy(59, p);
+                board.Occupy(58, p);
                 
             }
             ((King)piece).sethasMoved(true);
